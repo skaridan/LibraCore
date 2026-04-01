@@ -6,7 +6,10 @@ namespace LibraCore.Infrastructure.Data.Entities
     {
         public ApplicationUser()
         {
-            this.Id = Guid.NewGuid();
+            Id = Guid.NewGuid();
+            Orders = new HashSet<Order>();
         }
+
+        public virtual ICollection<Order> Orders { get; set; }
     }
 }
