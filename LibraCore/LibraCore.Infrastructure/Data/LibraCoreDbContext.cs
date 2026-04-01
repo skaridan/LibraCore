@@ -12,8 +12,6 @@ namespace LibraCore.Infrastructure.Data
         {
         }
 
-        public virtual DbSet<ApplicationUser> Users { get; set; } = null!;
-
         public virtual DbSet<Book> Books { get; set; } = null!;
 
         public virtual DbSet<Author> Authors { get; set; } = null!;
