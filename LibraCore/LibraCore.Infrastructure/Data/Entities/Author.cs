@@ -13,6 +13,8 @@ namespace LibraCore.Infrastructure.Data.Entities
         [MaxLength(AuthorNameMaxLength)]
         public string Name { get; set; } = null!;
 
+        public bool IsDeleted { get; set; } = false;
+
         public virtual ICollection<Book> Books { get; set; } = new HashSet<Book>();
     }
 }

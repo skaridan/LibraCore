@@ -16,6 +16,8 @@ namespace LibraCore.Infrastructure.Data.Entities
         [MaxLength(CommentMaxLength)]
         public string Comment { get; set; } = null!;
 
+        public bool IsDeleted { get; set; } = false;
+
         [ForeignKey(nameof(Book))]
         public Guid BookId { get; set; }
 

@@ -26,6 +26,8 @@ namespace LibraCore.Infrastructure.Data.Entities
         [Column(TypeName = BookPriceFormat)]
         public decimal Price { get; set; }
 
+        public bool IsDeleted { get; set; } = false;
+
         [ForeignKey(nameof(Author))]
         public Guid AuthorId { get; set; }
 
