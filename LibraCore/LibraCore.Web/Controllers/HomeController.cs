@@ -1,6 +1,6 @@
-using System.Diagnostics;
-using LibraCore.Web.Models;
+using LibraCore.Services.ViewModels;
 using Microsoft.AspNetCore.Mvc;
+using System.Diagnostics;
 
 namespace LibraCore.Web.Controllers
 {

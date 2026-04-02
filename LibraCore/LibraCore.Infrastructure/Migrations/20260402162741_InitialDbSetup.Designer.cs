@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace LibraCore.Infrastructure.Migrations
 {
     [DbContext(typeof(LibraCoreDbContext))]
-    [Migration("20260401180058_InitialDbSetup")]
+    [Migration("20260402162741_InitialDbSetup")]
     partial class InitialDbSetup
     {
         /// <inheritdoc />
@@ -121,7 +121,7 @@ namespace LibraCore.Infrastructure.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<Guid>("GenreId")
+                    b.Property<Guid>("GenreID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
@@ -142,7 +142,7 @@ namespace LibraCore.Infrastructure.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("GenreId");
+                    b.HasIndex("GenreID");
 
                     b.ToTable("Books");
                 });
@@ -404,7 +404,7 @@ namespace LibraCore.Infrastructure.Migrations
 
                     b.HasOne("LibraCore.Infrastructure.Data.Entities.Genre", "Genre")
                         .WithMany("Books")
-                        .HasForeignKey("GenreId")
+                        .HasForeignKey("GenreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

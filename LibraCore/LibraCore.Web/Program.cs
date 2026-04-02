@@ -23,11 +23,14 @@ namespace LibraCore.Web
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
-            ConfigureIdentity(builder.Configuration, options))
-                .AddRoles<IdentityRole<Guid>>()
-                .AddEntityFrameworkStores<LibraCoreDbContext>();
+            {
+                ConfigureIdentity(builder.Configuration, options);
+            })
+            .AddRoles<IdentityRole<Guid>>()
+            .AddEntityFrameworkStores<LibraCoreDbContext>();
 
             builder.Services.AddControllersWithViews();
+            builder.Services.AddRazorPages();
 
             WebApplication app = builder.Build();
 
@@ -54,6 +57,7 @@ namespace LibraCore.Web
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
+
             app.MapRazorPages();
 
             app.Run();
