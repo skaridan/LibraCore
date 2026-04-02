@@ -9,10 +9,10 @@ namespace LibraCore.Web
     {
         public static void Main(string[] args)
         {
-            var builder = WebApplication.CreateBuilder(args);
+            WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
-            var connectionString = builder
+            string connectionString = builder
                 .Configuration
                 .GetConnectionString("DevConnectionString")
                 ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
@@ -22,13 +22,14 @@ namespace LibraCore.Web
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-            builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = false)
+            builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
+            ConfigureIdentity(builder.Configuration, options))
                 .AddRoles<IdentityRole<Guid>>()
                 .AddEntityFrameworkStores<LibraCoreDbContext>();
 
             builder.Services.AddControllersWithViews();
 
-            var app = builder.Build();
+            WebApplication app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -56,6 +57,29 @@ namespace LibraCore.Web
             app.MapRazorPages();
 
             app.Run();
+        }
+
+        private static void ConfigureIdentity(ConfigurationManager configuration, IdentityOptions options)
+        {
+            options.Password.RequireDigit = configuration
+                .GetValue<bool>("IdentityOptions:Password:RequireDigit");
+            options.Password.RequiredLength = configuration
+                .GetValue<int>("IdentityOptions:Password:RequiredLength");
+            options.Password.RequiredUniqueChars = configuration
+                .GetValue<int>("IdentityOptions:Password:RequiredUniqueChars");
+            options.Password.RequireNonAlphanumeric = configuration
+                .GetValue<bool>("IdentityOptions:Password:RequireNonAlphanumeric");
+            options.Password.RequireUppercase = configuration
+                .GetValue<bool>("IdentityOptions:Password:RequireUppercase");
+            options.Password.RequireLowercase = configuration
+                .GetValue<bool>("IdentityOptions:Password:RequireLowercase");
+
+            options.SignIn.RequireConfirmedEmail = configuration
+                .GetValue<bool>("IdentityOptions:SignIn:RequireConfirmedEmail");
+            options.SignIn.RequireConfirmedPhoneNumber = configuration
+                .GetValue<bool>("IdentityOptions:SignIn:RequireConfirmedPhoneNumber");
+            options.SignIn.RequireConfirmedAccount = configuration
+                .GetValue<bool>("IdentityOptions:SignIn:RequireConfirmedAccount");
         }
     }
 }
