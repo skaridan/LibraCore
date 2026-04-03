@@ -5,18 +5,16 @@ using Microsoft.EntityFrameworkCore;
 
 namespace LibraCore.Infrastructure.Repositories
 {
-    public class BookRepository : IBookRepository
+    public class BookRepository : BaseRepository, IBookRepository
     {
-        private readonly LibraCoreDbContext dbContext;
-
         public BookRepository(LibraCoreDbContext dbContext)
+            : base(dbContext)
         {
-            this.dbContext = dbContext;
         }
 
         public async Task<IEnumerable<Book>> GetAllBooksAsync()
         {
-            return await dbContext
+            return await DbContext
                 .Books
                 .Include(b => b.Author)
                 .AsNoTracking()
