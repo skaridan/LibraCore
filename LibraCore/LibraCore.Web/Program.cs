@@ -1,5 +1,9 @@
 using LibraCore.Infrastructure.Data;
 using LibraCore.Infrastructure.Data.Entities;
+using LibraCore.Infrastructure.Repositories;
+using LibraCore.Infrastructure.Repositories.Interfaces;
+using LibraCore.Services.Repositories;
+using LibraCore.Services.Repositories.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,7 +15,6 @@ namespace LibraCore.Web
         {
             WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            // Add services to the container.
             string connectionString = builder
                 .Configuration
                 .GetConnectionString("DevConnectionString")
@@ -21,6 +24,9 @@ namespace LibraCore.Web
                 options.UseSqlServer(connectionString));
 
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+            builder.Services.AddScoped<IBookRepository, BookRepository>();
+            builder.Services.AddScoped<IBookService, BookService>();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
@@ -34,7 +40,6 @@ namespace LibraCore.Web
 
             WebApplication app = builder.Build();
 
-            // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
             {
                 app.UseMigrationsEndPoint();
@@ -42,7 +47,6 @@ namespace LibraCore.Web
             else
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
