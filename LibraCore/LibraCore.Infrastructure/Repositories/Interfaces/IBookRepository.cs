@@ -7,5 +7,7 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
         Task<IEnumerable<Book>> GetAllBooksAsync();
 
         Task<bool> AddBookAsync(Book book);
+
+        Task<Book?> GetBookByIdAsync(Guid id);
     }
 }

@@ -16,9 +16,28 @@ namespace LibraCore.Infrastructure.Repositories
         {
             return await DbContext
                 .Books
+                .Include(b => b.Genre)
                 .Include(b => b.Author)
                 .AsNoTracking()
                 .ToArrayAsync();
+        }
+
+
+        public async Task<bool> AddBookAsync(Book book)
+        {
+            await DbContext.Books.AddAsync(book);
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
+        }
+
+        public async Task<Book?> GetBookByIdAsync(Guid id)
+        {
+            return await DbContext
+                .Books
+                .Include(b => b.Author)
+                .Include(b => b.Genre)
+                .SingleOrDefaultAsync(b => b.Id == id);
         }
     }
 }

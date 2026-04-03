@@ -7,5 +7,7 @@ namespace LibraCore.Services.Repositories.Interfaces
         Task<IEnumerable<BookIndexViewModel>> GetAllBooksOrderedByTitleAsync();
 
         Task AddBookAsync(BookInputFormModel bookInputFormModel);
+
+        Task<BookDetailsViewModel?> GetBookDetailsByIdAsync(Guid id);
     }
 }

@@ -70,5 +70,29 @@ namespace LibraCore.Services.Repositories
                 throw new EntityPersistFailureException();
             }
         }
+
+        public async Task<BookDetailsViewModel?> GetBookDetailsByIdAsync(Guid id)
+        {
+            Book? book = await bookRepository
+                .GetBookByIdAsync(id);
+            if (book == null)
+            {
+                return null;
+            }
+
+            BookDetailsViewModel model = new BookDetailsViewModel
+            {
+                Id = book.Id,
+                Title = book.Title,
+                Author = book.Author.Name,
+                Genre = book.Genre.Name,
+                Description = book.Description,
+                Price = book.Price,
+                ReleaseDate = book.ReleaseDate.ToString(DateFormat),
+                ImageUrl = book.ImageUrl ?? DefaultImageUrl
+            };
+
+            return model;
+        }
     }
 }

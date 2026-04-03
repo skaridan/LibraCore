@@ -77,5 +77,18 @@ namespace LibraCore.Web.Controllers.Book
             }
         }
 
+        [AllowAnonymous]
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            BookDetailsViewModel? book = await bookService
+                .GetBookDetailsByIdAsync(id);
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            return View(book);
+        }
     }
 }
