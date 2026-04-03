@@ -22,7 +22,6 @@ namespace LibraCore.Infrastructure.Repositories
                 .ToArrayAsync();
         }
 
-
         public async Task<bool> AddBookAsync(Book book)
         {
             await DbContext.Books.AddAsync(book);
@@ -38,6 +37,14 @@ namespace LibraCore.Infrastructure.Repositories
                 .Include(b => b.Author)
                 .Include(b => b.Genre)
                 .SingleOrDefaultAsync(b => b.Id == id);
+        }
+
+        public async Task<bool> EditBookAsync(Book book)
+        {
+            DbContext.Books.Update(book);
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
         }
     }
 }

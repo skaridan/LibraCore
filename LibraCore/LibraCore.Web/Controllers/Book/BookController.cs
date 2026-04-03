@@ -90,5 +90,62 @@ namespace LibraCore.Web.Controllers.Book
 
             return View(book);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Edit(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            BookInputFormModel? formModel = await bookService
+                .GetFormModelByIdAsync(id);
+            if (formModel == null)
+            {
+                return NotFound();
+            }
+
+            formModel.Genres = (await genreService.FetchGenresAsync()).ToArray();
+
+            return View(formModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Edit(Guid id, BookInputFormModel formModel)
+        {
+            if (!ModelState.IsValid)
+            {
+                formModel.Genres = (await genreService.FetchGenresAsync()).ToArray();
+                return View(formModel);
+            }
+
+            try
+            {
+                await bookService.EditBookAsync(id, formModel);
+
+                return RedirectToAction(nameof(Details), new { id });
+            }
+            catch (EntityNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (EntityPersistFailureException epfe)
+            {
+                logger.LogError(epfe, string.Format(CrudBookFailureMessage, nameof(Edit)));
+                ModelState.AddModelError(string.Empty, "An error occurred while saving the changes. Please try again.");
+
+                formModel.Genres = (await genreService.FetchGenresAsync()).ToArray();
+                return View(formModel);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, GeneralError);
+                ModelState.AddModelError(string.Empty, GeneralError);
+
+                return View(formModel); 
+            }
+        }
     }
 }

@@ -94,5 +94,64 @@ namespace LibraCore.Services.Repositories
 
             return model;
         }
+
+        public async Task EditBookAsync(Guid id, BookInputFormModel formModel)
+        {
+            Book? bookDb = await bookRepository.GetBookByIdAsync(id);
+
+            if (bookDb == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
+            Author? author = await authorRepository
+                .AuthorExistsAsync(formModel.Author);
+
+            if (author == null)
+            {
+                author = new Author
+                {
+                    Id = Guid.NewGuid(),
+                    Name = formModel.Author
+                };
+
+                await authorRepository.AddAuthorAsync(author);
+            }
+
+            bookDb.Title = formModel.Title;
+            bookDb.Description = formModel.Description;
+            bookDb.Price = formModel.Price;
+            bookDb.ImageUrl = formModel.ImageUrl;
+            bookDb.GenreId = formModel.GenreId;
+            bookDb.AuthorId = author.Id;
+            bookDb.ReleaseDate = DateOnly.FromDateTime(formModel.ReleaseDate);
+
+            bool editSuccess = await bookRepository.EditBookAsync(bookDb);
+            if (!editSuccess)
+            {
+                throw new EntityPersistFailureException();
+            }
+        }
+
+        public async Task<BookInputFormModel?> GetFormModelByIdAsync(Guid id)
+        {
+            Book? book = await bookRepository.GetBookByIdAsync(id);
+
+            if (book == null)
+            {
+                return null;
+            }
+
+            return new BookInputFormModel
+            {
+                Title = book.Title,
+                Author = book.Author.Name,
+                Description = book.Description,
+                GenreId = book.GenreId,
+                Price = book.Price,
+                ReleaseDate = book.ReleaseDate.ToDateTime(TimeOnly.MinValue),
+                ImageUrl = book.ImageUrl
+            };
+        }
     }
 }

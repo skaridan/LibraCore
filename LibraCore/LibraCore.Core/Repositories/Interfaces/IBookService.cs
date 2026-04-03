@@ -8,6 +8,11 @@ namespace LibraCore.Services.Repositories.Interfaces
 
         Task AddBookAsync(BookInputFormModel bookInputFormModel);
 
+        Task EditBookAsync(Guid id, BookInputFormModel formModel);
+
         Task<BookDetailsViewModel?> GetBookDetailsByIdAsync(Guid id);
+
+        Task<BookInputFormModel?> GetFormModelByIdAsync(Guid id);
+
     }
 }
