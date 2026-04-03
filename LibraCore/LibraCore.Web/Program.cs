@@ -26,7 +26,12 @@ namespace LibraCore.Web
             builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
             builder.Services.AddScoped<IBookRepository, BookRepository>();
+            builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
+            builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+
             builder.Services.AddScoped<IBookService, BookService>();
+            builder.Services.AddScoped<IAuthorService, AuthorService>();
+            builder.Services.AddScoped<IGenreService, GenreService>();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {

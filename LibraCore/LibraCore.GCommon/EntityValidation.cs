@@ -10,8 +10,6 @@
             public const int DescriptionMinLength = 10;
             public const int DescriptionMaxLength = 2000;
 
-            public const string DefaultImageUrl = "";
-
             public const string BookPriceFormat = "decimal(10, 2)";
         }
 

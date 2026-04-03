@@ -5,5 +5,7 @@ namespace LibraCore.Services.Repositories.Interfaces
     public interface IBookService
     {
         Task<IEnumerable<BookIndexViewModel>> GetAllBooksOrderedByTitleAsync();
+
+        Task AddBookAsync(BookInputFormModel bookInputFormModel);
     }
 }
