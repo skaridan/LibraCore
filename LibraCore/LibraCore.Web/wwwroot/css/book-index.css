@@ -1,0 +1,31 @@
+﻿.book-list-cover-wrapper {
+    width: 140px;
+    height: 200px;
+    background: #f8f9fa;
+    border-right: 1px solid rgba(0,0,0,0.05);
+    overflow: hidden;
+}
+
+.book-list-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}
+
+.feature-card {
+    background: white !important;
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 8px 25px rgba(0,0,0,0.1) !important;
+    transition: all 0.3s ease !important;
+}
+    
+    .feature-card:hover {
+        transform: translateX(10px) !important;
+        box-shadow: 0 12px 35px rgba(0,0,0,0.15) !important;
+    }
+
+.badge {
+    font-weight: 700;
+}

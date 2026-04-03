@@ -28,4 +28,8 @@
     <ProjectReference Include="..\LibraCore.Infrastructure\LibraCore.Infrastructure.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\" />
+  </ItemGroup>
+
 </Project>
