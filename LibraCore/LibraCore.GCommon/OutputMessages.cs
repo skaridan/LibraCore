@@ -14,7 +14,6 @@
 
             public const string CrudBookFailureMessage = "An error while {0} book. Please try again later.";
 
-            public const string PersistFailureMessage = "An error occurred while saving the changes. Please try again.";
             public const string GeneralError = "Something went wrong. Please try again.";
 
         }

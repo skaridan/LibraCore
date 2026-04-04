@@ -33,7 +33,7 @@ namespace LibraCore.Infrastructure.Data.Entities
 
         public virtual Author Author { get; set; } = null!;
 
-        public Guid GenreId { get; set; }
+        public Guid GenreID { get; set; }
 
         public virtual Genre Genre { get; set; } = null!;
 

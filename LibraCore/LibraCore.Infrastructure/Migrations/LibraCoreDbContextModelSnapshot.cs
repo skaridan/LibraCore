@@ -98,7 +98,7 @@ namespace LibraCore.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "ADMIN@LIBRA.LOCAL",
                             NormalizedUserName = "ADMIN@LIBRA.LOCAL",
-                            PasswordHash = "AQAAAAIAAYagAAAAENk+iTKgYFpJAJDVuftm2xENoPW1q/ZQoeN8uUHo7tJ+X0Wx/7pKtvlTBCLnx/o5eQ==",
+                            PasswordHash = "AQAAAAIAAYagAAAAELmFf64vJ3yV6wgxhKTBHUaCK/kH34FUCiDpFWbjUxgKZw3XDjd+e/YiZhwAgznT6g==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "A1D8E8B0-2001-4B2F-8A0A-000000000201",
                             TwoFactorEnabled = false,
@@ -114,7 +114,7 @@ namespace LibraCore.Infrastructure.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "USER@LIBRA.LOCAL",
                             NormalizedUserName = "USER@LIBRA.LOCAL",
-                            PasswordHash = "AQAAAAIAAYagAAAAEAn1zoprKyZ9jNMaOujCkFE2ittyi5qiRONIbwCpnhEYOffrcvI1EC6BIRAh13yYYA==",
+                            PasswordHash = "AQAAAAIAAYagAAAAEB9LGEIAUqyiczYSFTVsHcV03w5uwTMEL+D+IC0VW0VX4GZ2zdWEwEKPbZ7Yd9/XXQ==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "A1D8E8B0-2002-4B2F-8A0A-000000000202",
                             TwoFactorEnabled = false,
@@ -247,7 +247,7 @@ namespace LibraCore.Infrastructure.Migrations
                         .HasMaxLength(2000)
                         .HasColumnType("nvarchar(2000)");
 
-                    b.Property<Guid>("GenreId")
+                    b.Property<Guid>("GenreID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("ImageUrl")
@@ -271,7 +271,7 @@ namespace LibraCore.Infrastructure.Migrations
 
                     b.HasIndex("AuthorId");
 
-                    b.HasIndex("GenreId");
+                    b.HasIndex("GenreID");
 
                     b.ToTable("Books");
 
@@ -281,7 +281,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3001-4b2f-8a0a-000000000301"),
                             AuthorId = new Guid("b1d8e8b0-1001-4b2f-8a0a-000000000101"),
                             Description = "A classic romantic novel about manners and marriage.",
-                            GenreId = new Guid("a1f8e8b0-0005-4b2f-8a0a-000000000005"),
+                            GenreID = new Guid("a1f8e8b0-0005-4b2f-8a0a-000000000005"),
                             ImageUrl = "https://s3.amazonaws.com/nightjarprod/content/uploads/sites/192/2025/12/02152113/v5gShop7147X33ytbcC2u05KDuc.jpg",
                             IsDeleted = false,
                             Price = 9.99m,
@@ -293,7 +293,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3002-4b2f-8a0a-000000000302"),
                             AuthorId = new Guid("b1d8e8b0-1002-4b2f-8a0a-000000000102"),
                             Description = "The growth and personal development of an orphan named Pip.",
-                            GenreId = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
+                            GenreID = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
                             ImageUrl = "https://m.media-amazon.com/images/I/815ZFQcdRcL._AC_UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 11.50m,
@@ -305,7 +305,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3003-4b2f-8a0a-000000000303"),
                             AuthorId = new Guid("b1d8e8b0-1003-4b2f-8a0a-000000000103"),
                             Description = "A young boy's adventures along the Mississippi River.",
-                            GenreId = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
+                            GenreID = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
                             ImageUrl = "https://m.media-amazon.com/images/I/91sBZnKzEfL._AC_UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 10.00m,
@@ -317,7 +317,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3004-4b2f-8a0a-000000000304"),
                             AuthorId = new Guid("b1d8e8b0-1004-4b2f-8a0a-000000000104"),
                             Description = "A dystopian novel about surveillance and totalitarianism.",
-                            GenreId = new Guid("a1f8e8b0-0007-4b2f-8a0a-000000000007"),
+                            GenreID = new Guid("a1f8e8b0-0007-4b2f-8a0a-000000000007"),
                             ImageUrl = "https://m.media-amazon.com/images/I/71wANojhEKL._AC_UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 12.99m,
@@ -329,7 +329,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3005-4b2f-8a0a-000000000305"),
                             AuthorId = new Guid("b1d8e8b0-1005-4b2f-8a0a-000000000105"),
                             Description = "A day in the life of Clarissa Dalloway in post‑war London.",
-                            GenreId = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
+                            GenreID = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
                             ImageUrl = "https://www.book.store.bg/lrgimg/779190437/mrs-dalloway.jpg",
                             IsDeleted = false,
                             Price = 8.75m,
@@ -341,7 +341,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3006-4b2f-8a0a-000000000306"),
                             AuthorId = new Guid("b1d8e8b0-1006-4b2f-8a0a-000000000106"),
                             Description = "A story of the Jazz Age and the decline of the American Dream.",
-                            GenreId = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
+                            GenreID = new Guid("a1f8e8b0-0001-4b2f-8a0a-000000000001"),
                             ImageUrl = "https://upload.wikimedia.org/wikipedia/commons/7/7a/The_Great_Gatsby_Cover_1925_Retouched.jpg",
                             IsDeleted = false,
                             Price = 9.50m,
@@ -353,7 +353,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3007-4b2f-8a0a-000000000307"),
                             AuthorId = new Guid("b1d8e8b0-1007-4b2f-8a0a-000000000107"),
                             Description = "The first book in the Harry Potter series; a young wizard begins his journey.",
-                            GenreId = new Guid("a1f8e8b0-0006-4b2f-8a0a-000000000006"),
+                            GenreID = new Guid("a1f8e8b0-0006-4b2f-8a0a-000000000006"),
                             ImageUrl = "https://cdn.ozone.bg/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/h/a/a19438e622aa321a0e73f360f1f3f855/harry-potter-and-the-philosopher-s-stone-30.jpg",
                             IsDeleted = false,
                             Price = 14.99m,
@@ -365,7 +365,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3008-4b2f-8a0a-000000000308"),
                             AuthorId = new Guid("b1d8e8b0-1008-4b2f-8a0a-000000000108"),
                             Description = "A chilling horror novel set in an isolated hotel.",
-                            GenreId = new Guid("a1f8e8b0-000c-4b2f-8a0a-00000000000c"),
+                            GenreID = new Guid("a1f8e8b0-000c-4b2f-8a0a-00000000000c"),
                             ImageUrl = "https://m.media-amazon.com/images/I/91U7HNa2NQL._AC_UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 13.50m,
@@ -377,7 +377,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-3009-4b2f-8a0a-000000000309"),
                             AuthorId = new Guid("b1d8e8b0-1009-4b2f-8a0a-000000000109"),
                             Description = "A Hercule Poirot mystery on a snowbound train.",
-                            GenreId = new Guid("a1f8e8b0-0003-4b2f-8a0a-000000000003"),
+                            GenreID = new Guid("a1f8e8b0-0003-4b2f-8a0a-000000000003"),
                             ImageUrl = "https://m.media-amazon.com/images/I/81aY+Fk-g8L._UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 10.99m,
@@ -389,7 +389,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-300a-4b2f-8a0a-00000000030a"),
                             AuthorId = new Guid("b1d8e8b0-100a-4b2f-8a0a-00000000010a"),
                             Description = "A fantasy adventure that precedes the Lord of the Rings.",
-                            GenreId = new Guid("a1f8e8b0-0006-4b2f-8a0a-000000000006"),
+                            GenreID = new Guid("a1f8e8b0-0006-4b2f-8a0a-000000000006"),
                             ImageUrl = "https://m.media-amazon.com/images/I/81uEDUfKBZL.jpg",
                             IsDeleted = false,
                             Price = 12.00m,
@@ -401,7 +401,7 @@ namespace LibraCore.Infrastructure.Migrations
                             Id = new Guid("d1b8e8b0-300b-4b2f-8a0a-00000000030b"),
                             AuthorId = new Guid("b1d8e8b0-100c-4b2f-8a0a-00000000010c"),
                             Description = "An epic novel following several families during the Napoleonic era.",
-                            GenreId = new Guid("a1f8e8b0-0009-4b2f-8a0a-000000000009"),
+                            GenreID = new Guid("a1f8e8b0-0009-4b2f-8a0a-000000000009"),
                             ImageUrl = "https://m.media-amazon.com/images/I/81W6BFaJJWL._AC_UF1000,1000_QL80_.jpg",
                             IsDeleted = false,
                             Price = 15.00m,
@@ -891,7 +891,7 @@ namespace LibraCore.Infrastructure.Migrations
 
                     b.HasOne("LibraCore.Infrastructure.Data.Entities.Genre", "Genre")
                         .WithMany("Books")
-                        .HasForeignKey("GenreId")
+                        .HasForeignKey("GenreID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

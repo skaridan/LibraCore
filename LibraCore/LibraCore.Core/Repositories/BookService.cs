@@ -153,19 +153,5 @@ namespace LibraCore.Services.Repositories
                 ImageUrl = book.ImageUrl
             };
         }
-        public async Task SoftDeleteBookAsync(Guid id)
-        {
-            Book? book = await bookRepository.GetBookByIdAsync(id);
-            if (book == null)
-            {
-                throw new EntityNotFoundException();
-            }
-
-            bool success = await bookRepository.SoftDeleteBookAsync(book);
-            if (!success)
-            {
-                throw new EntityPersistFailureException();
-            }
-        }
     }
 }

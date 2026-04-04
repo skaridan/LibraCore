@@ -6,12 +6,10 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
     {
         Task<IEnumerable<Book>> GetAllBooksAsync();
 
-        Task<Book?> GetBookByIdAsync(Guid id);
-
         Task<bool> AddBookAsync(Book book);
 
-        Task<bool> EditBookAsync(Book book);
+        Task<Book?> GetBookByIdAsync(Guid id);
 
-        Task<bool> SoftDeleteBookAsync(Book book);
+        Task<bool> EditBookAsync(Book book);
     }
 }
