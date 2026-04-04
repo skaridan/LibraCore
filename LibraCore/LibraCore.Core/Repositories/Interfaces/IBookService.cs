@@ -10,6 +10,8 @@ namespace LibraCore.Services.Repositories.Interfaces
 
         Task EditBookAsync(Guid id, BookInputFormModel formModel);
 
+        Task SoftDeleteBookAsync(Guid id);
+
         Task<BookDetailsViewModel?> GetBookDetailsByIdAsync(Guid id);
 
         Task<BookInputFormModel?> GetFormModelByIdAsync(Guid id);

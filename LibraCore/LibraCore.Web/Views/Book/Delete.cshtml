@@ -1,0 +1,23 @@
+﻿@model BookDetailsViewModel
+
+<div class="container mt-5">
+	<div class="row justify-content-center">
+		<div class="col-md-5 text-center bg-white p-5 rounded-4 shadow-lg">
+
+			<img src="@Model.ImageUrl" class="rounded-3 mb-4 shadow" style="max-height: 200px;">
+
+			<h2 class="fw-bold">Delete Book?</h2>
+			<p class="text-muted">Are you sure you want to delete <strong>@Model.Title</strong>?</p>
+
+			<form asp-action="Delete" method="post" class="mt-4">
+				<input type="hidden" name="id" value="@Model.Id" />
+
+				<div class="d-grid gap-2">
+					<button type="submit" class="btn btn-danger btn-lg rounded-pill">Yes, Delete</button>
+					<a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-lg rounded-pill">No, Keep it</a>
+				</div>
+			</form>
+
+		</div>
+	</div>
+</div>

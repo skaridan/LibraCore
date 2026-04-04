@@ -8,6 +8,8 @@ namespace LibraCore.Infrastructure.Data.Configuration
     {
         public void Configure(EntityTypeBuilder<Book> entity)
         {
+            entity.HasQueryFilter(b => b.IsDeleted == false);
+
             entity.HasData(SeedBooks());
         }
 
@@ -25,7 +27,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 9.99m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1001-4b2f-8a0a-000000000101"),
-                    GenreID = Guid.Parse("a1f8e8b0-0005-4b2f-8a0a-000000000005")
+                    GenreId = Guid.Parse("a1f8e8b0-0005-4b2f-8a0a-000000000005")
                 },
                 new Book
                 {
@@ -37,7 +39,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 11.50m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1002-4b2f-8a0a-000000000102"),
-                    GenreID = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
+                    GenreId = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
                 },
                 new Book
                 {
@@ -49,7 +51,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 10.00m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1003-4b2f-8a0a-000000000103"),
-                    GenreID = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
+                    GenreId = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
                 },
                 new Book
                 {
@@ -61,7 +63,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 12.99m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1004-4b2f-8a0a-000000000104"),
-                    GenreID = Guid.Parse("a1f8e8b0-0007-4b2f-8a0a-000000000007")
+                    GenreId = Guid.Parse("a1f8e8b0-0007-4b2f-8a0a-000000000007")
                 },
                 new Book
                 {
@@ -73,7 +75,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 8.75m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1005-4b2f-8a0a-000000000105"),
-                    GenreID = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
+                    GenreId = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
                 },
                 new Book
                 {
@@ -85,7 +87,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 9.50m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1006-4b2f-8a0a-000000000106"),
-                    GenreID = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
+                    GenreId = Guid.Parse("a1f8e8b0-0001-4b2f-8a0a-000000000001")
                 },
                 new Book
                 {
@@ -97,7 +99,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 14.99m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1007-4b2f-8a0a-000000000107"),
-                    GenreID = Guid.Parse("a1f8e8b0-0006-4b2f-8a0a-000000000006")
+                    GenreId = Guid.Parse("a1f8e8b0-0006-4b2f-8a0a-000000000006")
                 },
                 new Book
                 {
@@ -109,7 +111,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 13.50m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1008-4b2f-8a0a-000000000108"),
-                    GenreID = Guid.Parse("a1f8e8b0-000c-4b2f-8a0a-00000000000c")
+                    GenreId = Guid.Parse("a1f8e8b0-000c-4b2f-8a0a-00000000000c")
                 },
                 new Book
                 {
@@ -121,7 +123,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 10.99m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-1009-4b2f-8a0a-000000000109"),
-                    GenreID = Guid.Parse("a1f8e8b0-0003-4b2f-8a0a-000000000003")
+                    GenreId = Guid.Parse("a1f8e8b0-0003-4b2f-8a0a-000000000003")
                 },
                 new Book
                 {
@@ -133,7 +135,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 12.00m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-100a-4b2f-8a0a-00000000010a"),
-                    GenreID = Guid.Parse("a1f8e8b0-0006-4b2f-8a0a-000000000006")
+                    GenreId = Guid.Parse("a1f8e8b0-0006-4b2f-8a0a-000000000006")
                 },
                 new Book
                 {
@@ -145,7 +147,7 @@ namespace LibraCore.Infrastructure.Data.Configuration
                     Price = 15.00m,
                     IsDeleted = false,
                     AuthorId = Guid.Parse("b1d8e8b0-100c-4b2f-8a0a-00000000010c"),
-                    GenreID = Guid.Parse("a1f8e8b0-0009-4b2f-8a0a-000000000009")
+                    GenreId = Guid.Parse("a1f8e8b0-0009-4b2f-8a0a-000000000009")
                 }
             };
         }

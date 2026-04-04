@@ -18,6 +18,7 @@ namespace LibraCore.Infrastructure.Repositories
                 .Books
                 .Include(b => b.Genre)
                 .Include(b => b.Author)
+                .Where(b => b.IsDeleted == false)
                 .AsNoTracking()
                 .ToArrayAsync();
         }
@@ -44,6 +45,16 @@ namespace LibraCore.Infrastructure.Repositories
             DbContext.Books.Update(book);
             int resultCount = await SaveChangesAsync();
 
+            return resultCount == 1;
+        }
+
+        public async Task<bool> SoftDeleteBookAsync(Book book)
+        {
+            book.IsDeleted = true;
+
+            DbContext.Books.Update(book);
+
+            int resultCount = await SaveChangesAsync();
             return resultCount == 1;
         }
     }
