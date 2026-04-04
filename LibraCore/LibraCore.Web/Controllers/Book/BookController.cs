@@ -134,7 +134,7 @@ namespace LibraCore.Web.Controllers.Book
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, string.Format(CrudBookFailureMessage, nameof(Edit)));
-                ModelState.AddModelError(string.Empty, "An error occurred while saving the changes. Please try again.");
+                ModelState.AddModelError(string.Empty, PersistFailureMessage);
 
                 formModel.Genres = (await genreService.FetchGenresAsync()).ToArray();
                 return View(formModel);
@@ -144,8 +144,60 @@ namespace LibraCore.Web.Controllers.Book
                 logger.LogError(ex, GeneralError);
                 ModelState.AddModelError(string.Empty, GeneralError);
 
-                return View(formModel); 
+                return View(formModel);
             }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            BookDetailsViewModel? viewModel = await bookService
+                .GetBookDetailsByIdAsync(id);
+            if (viewModel == null)
+            {
+                return NotFound();
+            }
+
+            return View(viewModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(Guid id, BookDetailsViewModel? viewModel)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await bookService.SoftDeleteBookAsync(id);
+
+                return RedirectToAction(nameof(Index));
+            }
+            catch (EntityNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (EntityPersistFailureException epfe)
+            {
+                logger.LogError(epfe, string.Format(CrudBookFailureMessage, nameof(Delete)));
+                ModelState.AddModelError(string.Empty, PersistFailureMessage);
+            }
+            catch (Exception ex)
+            {
+                logger.LogError(ex, GeneralError);
+
+                return RedirectToAction(nameof(Details), new { id });
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }
