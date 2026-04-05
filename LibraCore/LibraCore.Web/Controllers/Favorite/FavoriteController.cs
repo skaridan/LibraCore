@@ -1,4 +1,5 @@
-﻿using LibraCore.Services.Services;
+﻿using LibraCore.Infrastructure.Data.Entities;
+using LibraCore.Services.Services;
 using LibraCore.Services.Services.Interfaces;
 using LibraCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,16 @@ namespace LibraCore.Web.Controllers.Favorite
                 .GetUserBooksOrderedByTitleAsync(userId);
 
             return View(favoriteViewModels);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Add(Guid id)
+        {
+            string userId = GetUserId()!;
+
+            await favoriteService.AddToFavoritesAsync(userId, id);
+
+            return RedirectToAction(nameof(Index), nameof(Book));
         }
     }
 }

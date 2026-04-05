@@ -13,6 +13,7 @@ namespace LibraCore.Services.Services
         {
             this.favoriteRepository = favoriteRepository;
         }
+
         public async Task<IEnumerable<FavoriteViewModel>> GetUserBooksOrderedByTitleAsync(string userId)
         {
             IEnumerable<UserBook> userBooks = await favoriteRepository
@@ -24,12 +25,20 @@ namespace LibraCore.Services.Services
                     Id = ub.BookId,
                     Title = ub.Book.Title,
                     Author = ub.Book.Author.Name,
+                    Price = ub.Book.Price,
                     ImageUrl = ub.Book.ImageUrl
                 })
                 .OrderBy(f => f.Title)
                 .ToArray();
 
             return favoriteViewModels;
+        }
+
+        public async Task AddToFavoritesAsync(string userId, Guid bookId)
+        {
+            Guid userGuid = Guid.Parse(userId);
+
+            await favoriteRepository.AddUserBookAsync(userGuid, bookId);
         }
     }
 }

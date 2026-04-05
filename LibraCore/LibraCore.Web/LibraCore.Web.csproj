@@ -26,6 +26,7 @@
     <ProjectReference Include="..\LibraCore.Core\LibraCore.Services.csproj" />
     <ProjectReference Include="..\LibraCore.GCommon\LibraCore.GCommon.csproj" />
     <ProjectReference Include="..\LibraCore.Infrastructure\LibraCore.Infrastructure.csproj" />
+    <ProjectReference Include="..\LibraCore.ViewModels\LibraCore.ViewModels.csproj" />
   </ItemGroup>
 
   <ItemGroup>

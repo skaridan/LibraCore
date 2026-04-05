@@ -40,7 +40,8 @@
 
 							<div class="card-body d-flex flex-column text-center bg-white">
 								<h5 class="card-title fw-bold text-truncate text-dark">@book.Title</h5>
-								<p class="card-text text-muted mb-3">by @book.Author</p>
+								<p class="card-text text-dark mb-1">by <span class="fw-bold">@book.Author</span></p>
+								<p class="fw-bold text-dark mb-3">@book.Price.ToString("F2") €</p>
 
 								<div class="mt-auto d-grid gap-2">
 									<a asp-controller="Book" asp-action="Details" asp-route-id="@book.Id"

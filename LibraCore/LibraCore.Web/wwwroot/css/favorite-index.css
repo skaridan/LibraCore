@@ -12,10 +12,14 @@
 }
 
 .favorite-container h1,
-.favorite-container p,
 .favorite-container h3 {
     color: #ffffff !important;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+}
+
+.card-body p {
+    color: #000000 !important;
+    text-shadow: none !important;
 }
 
 .favorite-container .text-muted {

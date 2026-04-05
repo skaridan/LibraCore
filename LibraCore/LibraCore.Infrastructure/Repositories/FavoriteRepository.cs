@@ -22,5 +22,31 @@ namespace LibraCore.Infrastructure.Repositories
                 .ThenInclude(ub => ub.Author)
                 .ToArrayAsync();
         }
+
+        public async Task AddUserBookAsync(Guid userId, Guid bookId)
+        {
+            bool alreadyExists = await DbContext
+                .UsersBooks
+                .AnyAsync(ub => ub.UserId == userId && ub.BookId == bookId);
+
+            if (!alreadyExists)
+            {
+                UserBook userBook = new UserBook
+                {
+                    UserId = userId,
+                    BookId = bookId
+                };
+
+                await DbContext.UsersBooks.AddAsync(userBook);
+                await SaveChangesAsync();
+            }
+        }
+
+        public async Task<bool> IsBookFavoriteAsync(Guid userId, Guid bookId)
+        {
+            return await DbContext
+                .UsersBooks
+                .AnyAsync(ub => ub.UserId == userId && ub.BookId == bookId);
+        }
     }
 }
