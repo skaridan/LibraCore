@@ -2,8 +2,8 @@ using LibraCore.Infrastructure.Data;
 using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories;
 using LibraCore.Infrastructure.Repositories.Interfaces;
-using LibraCore.Services.Repositories;
-using LibraCore.Services.Repositories.Interfaces;
+using LibraCore.Services.Services;
+using LibraCore.Services.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 
@@ -28,10 +28,12 @@ namespace LibraCore.Web
             builder.Services.AddScoped<IBookRepository, BookRepository>();
             builder.Services.AddScoped<IAuthorRepository, AuthorRepository>();
             builder.Services.AddScoped<IGenreRepository, GenreRepository>();
+            builder.Services.AddScoped<IFavoriteRepository, FavoriteRepository>();
 
             builder.Services.AddScoped<IBookService, BookService>();
             builder.Services.AddScoped<IAuthorService, AuthorService>();
             builder.Services.AddScoped<IGenreService, GenreService>();
+            builder.Services.AddScoped<IFavoriteService, FavoriteService>();
 
             builder.Services.AddDefaultIdentity<ApplicationUser>(options =>
             {
