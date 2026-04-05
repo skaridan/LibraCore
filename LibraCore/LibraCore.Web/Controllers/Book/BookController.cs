@@ -1,5 +1,5 @@
 ﻿using LibraCore.GCommon.Exceptions;
-using LibraCore.Services.Repositories.Interfaces;
+using LibraCore.Services.Services.Interfaces;
 using LibraCore.Services.ViewModels.Book;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -27,8 +27,10 @@ namespace LibraCore.Web.Controllers.Book
         [HttpGet]
         public async Task<IActionResult> Index()
         {
+            string userId = GetUserId()!;
+
             IEnumerable<BookIndexViewModel> bookIndexViewModels = await bookService
-                .GetAllBooksOrderedByTitleAsync();
+                .GetAllBooksOrderedByTitleAsync(userId);
 
             return View(bookIndexViewModels);
         }
