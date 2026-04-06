@@ -12,6 +12,14 @@ namespace LibraCore.Infrastructure.Repositories
         {
         }
 
+        public async Task<IEnumerable<Author>> GetAllAuthorsAsync()
+        {
+            return await DbContext
+                .Authors
+                .AsNoTracking()
+                .ToArrayAsync();
+        }
+
         public async Task<Author?> AuthorExistsAsync(string name)
         {
             Author? author = await DbContext

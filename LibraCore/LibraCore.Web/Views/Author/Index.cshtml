@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AuthorViewModel>
+@{
+    ViewData["Title"] = "Our Authors";
+}
+@section Styles {
+    <link rel="stylesheet" href="~/css/author-index.css" asp-append-version="true" />
+}
+<div class="authors-background authors-container">
+    <div class="container py-5">
+        <div class="text-center mb-5">
+            <h1 class="display-4 fw-bold">Our Authors</h1>
+            <p class="text-muted-custom">Discover the brilliant minds behind your favorite books</p>
+            <hr class="w-25 mx-auto border-light" />
+        </div>
+        @if (!Model.Any())
+        {
+            <div class="text-center py-5">
+                <h3 class="mb-3">No authors found at the moment.</h3>
+                <p>Please check back later or try a different search.</p>
+            </div>
+        }
+        else
+        {
+            <div class="row g-4 justify-content-center">
+                @foreach (var author in Model)
+                {
+                    <div class="col-md-4 col-lg-3">
+                        <div class="card h-100 shadow-sm author-card text-center p-3 border-0">
+                            <div class="d-flex justify-content-center mb-3">
+                                <div class="avatar-circle">
+                                    @author.Name[0]
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title fw-bold mb-1 text-dark">@author.Name</h5>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        }
+    </div>
+</div>
