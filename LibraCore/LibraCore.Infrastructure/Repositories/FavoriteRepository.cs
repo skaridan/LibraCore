@@ -23,30 +23,42 @@ namespace LibraCore.Infrastructure.Repositories
                 .ToArrayAsync();
         }
 
-        public async Task AddUserBookAsync(Guid userId, Guid bookId)
+        public async Task<bool> AddUserBookAsync(UserBook userBook)
         {
-            bool alreadyExists = await DbContext
-                .UsersBooks
-                .AnyAsync(ub => ub.UserId == userId && ub.BookId == bookId);
+            DbContext.UsersBooks.Add(userBook);
 
-            if (!alreadyExists)
-            {
-                UserBook userBook = new UserBook
-                {
-                    UserId = userId,
-                    BookId = bookId
-                };
+            int resultCount = await SaveChangesAsync();
 
-                await DbContext.UsersBooks.AddAsync(userBook);
-                await SaveChangesAsync();
-            }
+            return resultCount == 1;
+        }
+        public async Task<bool> RemoveUserBookAsync(UserBook userBook)
+        {
+            DbContext.UsersBooks.Remove(userBook);
+
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
         }
 
-        public async Task<bool> IsBookFavoriteAsync(Guid userId, Guid bookId)
+        public async Task<UserBook?> GetUserBookAsync(string userId, Guid bookId)
         {
-            return await DbContext
-                .UsersBooks
-                .AnyAsync(ub => ub.UserId == userId && ub.BookId == bookId);
+            Guid userGuid = Guid.Parse(userId);
+
+            UserBook? userBook = await DbContext
+                 .UsersBooks
+                 .SingleOrDefaultAsync(ub => ub.UserId == userGuid &&
+                 ub.BookId == bookId);
+
+            return userBook;
+        }
+
+        public async Task<bool> UpdateUserBookAsync(UserBook userBook)
+        {
+            DbContext.UsersBooks.Update(userBook);
+
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
         }
     }
 }

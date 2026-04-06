@@ -6,8 +6,12 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
     {
         Task<IEnumerable<UserBook>> GetAllUserBooksAsync(string userId);
 
-        Task AddUserBookAsync(Guid userId, Guid bookId);
+        Task<UserBook?> GetUserBookAsync(string userId, Guid bookId);
 
-        Task<bool> IsBookFavoriteAsync(Guid userId, Guid bookId);
+        Task<bool> AddUserBookAsync(UserBook userBook);
+
+        Task<bool> RemoveUserBookAsync(UserBook userBook);
+
+        Task<bool> UpdateUserBookAsync(UserBook userBook);
     }
 }
