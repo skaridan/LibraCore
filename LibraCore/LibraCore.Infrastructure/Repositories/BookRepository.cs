@@ -40,6 +40,13 @@ namespace LibraCore.Infrastructure.Repositories
                 .SingleOrDefaultAsync(b => b.Id == id);
         }
 
+        public async Task<bool> ExistsByIdAsync(Guid id)
+        {
+            return await DbContext
+                .Books
+                .AnyAsync(b => b.Id == id);
+        }
+
         public async Task<bool> EditBookAsync(Book book)
         {
             DbContext.Books.Update(book);

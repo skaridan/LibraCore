@@ -8,6 +8,8 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
 
         Task<Book?> GetBookByIdAsync(Guid id);
 
+        Task<bool> ExistsByIdAsync(Guid id);
+
         Task<bool> AddBookAsync(Book book);
 
         Task<bool> EditBookAsync(Book book);

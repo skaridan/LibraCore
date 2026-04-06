@@ -15,5 +15,7 @@ namespace LibraCore.Infrastructure.Data.Entities
         public Guid BookId { get; set; }
 
         public virtual Book Book { get; set; } = null!;
+
+        public bool IsDeleted { get; set; }
     }
 }
