@@ -18,5 +18,12 @@
             public const string GeneralError = "Something went wrong. Please try again.";
 
         }
+
+        public static class Favorite
+        {
+            public const string BookAlreadyInFavoritesMessage = "The book {0} is already in user {1} favorites.";
+            public const string AddToFavoritesFailureMessage = "An error occurred while adding the book to your favorites. Please try again in a few minutes.";
+            public const string RemoveFromWatchlistFailureMessage = "An error occurred while removing the movie to your watchlist. Please try again in a few minutes.";
+        }
     }
 }
