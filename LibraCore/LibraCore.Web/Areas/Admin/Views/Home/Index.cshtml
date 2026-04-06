@@ -1,0 +1,94 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-4 p-3 bg-light rounded shadow-sm">
+        <h2 class="mb-0"><i class="bi bi-speedometer2 text-primary me-2"></i>Admin Dashboard</h2>
+        <span class="badge bg-danger fs-6 px-3 py-2"><i class="bi bi-shield-lock me-1"></i>Mode: Administrator</span>
+    </div>
+
+    <hr class="mb-5" />
+
+    <div class="row g-4 text-center mb-5">
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100 bg-white hover-shadow">
+                <div class="card-body">
+                    <div class="display-5 text-primary mb-3"><i class="bi bi-people-fill"></i></div>
+                    <h5 class="card-title fw-bold">Users</h5>
+                    <p class="card-text text-muted small">Manage client profiles</p>
+                    <a href="#" class="btn btn-primary btn-sm rounded-pill px-4">View All</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100 bg-white hover-shadow">
+                <div class="card-body">
+                    <div class="display-5 text-success mb-3"><i class="bi bi-book-half"></i></div>
+                    <h5 class="card-title fw-bold">Books</h5>
+                    <p class="card-text text-muted small">Inventory and stock</p>
+                    <a asp-area="" asp-controller="Book" asp-action="Index" class="btn btn-success btn-sm rounded-pill px-4">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100 bg-white hover-shadow">
+                <div class="card-body">
+                    <div class="display-5 text-info mb-3"><i class="bi bi-person-workspace"></i></div>
+                    <h5 class="card-title fw-bold">Authors</h5>
+                    <p class="card-text text-muted small">Creator database</p>
+                    <a asp-area="" asp-controller="Author" asp-action="Index" class="btn btn-info text-white btn-sm rounded-pill px-4">Manage</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3">
+            <div class="card border-0 shadow-sm h-100 bg-white hover-shadow">
+                <div class="card-body">
+                    <div class="display-5 text-warning mb-3"><i class="bi bi-box-seam-fill"></i></div>
+                    <h5 class="card-title fw-bold">Orders</h5>
+                    <p class="card-text text-muted small">Delivery status</p>
+                    <a href="#" class="btn btn-warning text-white btn-sm rounded-pill px-4">View</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4">
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-dark text-white py-3">
+                    <h5 class="mb-0 small text-uppercase fw-bold"><i class="bi bi-lightning-charge-fill me-2"></i>Quick Actions</h5>
+                </div>
+                <div class="list-group list-group-flush p-2">
+                    <a asp-area="" asp-controller="Book" asp-action="Add" class="list-group-item list-group-item-action border-0 rounded mb-1">
+                        <i class="bi bi-plus-lg text-success me-3"></i>Add New Book
+                    </a>
+                    <a asp-area="" asp-controller="Author" asp-action="Create" class="list-group-item list-group-item-action border-0 rounded mb-1">
+                        <i class="bi bi-person-plus text-info me-3"></i>Add New Author
+                    </a>
+                    <a href="/Identity/Account/Register" class="list-group-item list-group-item-action border-0 rounded">
+                        <i class="bi bi-person-lock text-danger me-3"></i>Register Staff Member
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+                <div class="card-header bg-secondary text-white py-3">
+                    <h5 class="mb-0 small text-uppercase fw-bold"><i class="bi bi-hdd-network-fill me-2"></i>System Info</h5>
+                </div>
+                <div class="card-body">
+                    <ul class="list-unstyled mb-4">
+                        <li class="mb-2"><strong><i class="bi bi-key me-2"></i>Roles:</strong> <span class="badge bg-light text-dark border">Admin</span> <span class="badge bg-light text-dark border">User</span></li>
+                        <li class="mb-2"><strong><i class="bi bi-database me-2"></i>Connectivity:</strong> Active Connection (AspNetUserRoles)</li>
+                        <li><strong><i class="bi bi-clock-history me-2"></i>Last Activity:</strong> @DateTime.Now.ToString("HH:mm")</li>
+                    </ul>
+                    <div class="alert alert-warning border-0 py-2 small mb-0">
+                        <i class="bi bi-exclamation-triangle-fill me-2"></i>Warning: All changes made here are applied in real-time.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
