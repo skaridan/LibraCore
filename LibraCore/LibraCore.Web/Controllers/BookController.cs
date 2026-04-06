@@ -6,6 +6,8 @@ using Microsoft.AspNetCore.Mvc;
 
 using static LibraCore.GCommon.OutputMessages.Book;
 
+using static LibraCore.ApplicationConstants.RoleConstants;
+
 namespace LibraCore.Web.Controllers
 {
     public class BookController : BaseController
@@ -35,6 +37,7 @@ namespace LibraCore.Web.Controllers
             return View(bookIndexViewModels);
         }
 
+        [Authorize(Roles = AdminRole)]
         [HttpGet]
         public async Task<IActionResult> Add()
         {
@@ -46,6 +49,7 @@ namespace LibraCore.Web.Controllers
             return View(formModel);
         }
 
+        [Authorize(Roles = AdminRole)]
         [HttpPost]
         public async Task<IActionResult> Add(BookInputFormModel formModel)
         {
@@ -93,6 +97,7 @@ namespace LibraCore.Web.Controllers
             return View(book);
         }
 
+        [Authorize(Roles = AdminRole)]
         [HttpGet]
         public async Task<IActionResult> Edit(Guid id)
         {
@@ -113,6 +118,7 @@ namespace LibraCore.Web.Controllers
             return View(formModel);
         }
 
+        [Authorize(Roles = AdminRole)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, BookInputFormModel formModel)
@@ -150,6 +156,7 @@ namespace LibraCore.Web.Controllers
             }
         }
 
+        [Authorize(Roles = AdminRole)]
         [HttpGet]
         public async Task<IActionResult> Delete(Guid id)
         {
@@ -168,6 +175,7 @@ namespace LibraCore.Web.Controllers
             return View(viewModel);
         }
 
+        [Authorize(Roles = AdminRole)]
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id, BookDetailsViewModel? viewModel)

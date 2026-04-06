@@ -1,16 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
-// The .NET Foundation licenses this file to you under the MIT license.
-#nullable disable
+﻿#nullable disable
 
 using LibraCore.Infrastructure.Data.Entities;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.AspNetCore.WebUtilities;
 using System.ComponentModel.DataAnnotations;
-using System.Text;
-using System.Text.Encodings.Web;
 
 using static LibraCore.ApplicationConstants.IdentityConstants;
 
@@ -111,6 +105,11 @@ namespace LibraCore.Web.Areas.Identity.Pages.Account
                 IdentityResult result = await userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
+                    bool isFirstUser = userManager.Users.Count() == 1;
+                    string roleToAssign = isFirstUser ? "Admin" : "User";
+
+                    await userManager.AddToRoleAsync(user, roleToAssign);
+
                     string userId = await userManager.GetUserIdAsync(user);
 
                     if (userManager.Options.SignIn.RequireConfirmedAccount)
@@ -129,7 +128,6 @@ namespace LibraCore.Web.Areas.Identity.Pages.Account
                 }
             }
 
-            // If we got this far, something failed, redisplay form
             return Page();
         }
 

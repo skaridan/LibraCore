@@ -71,7 +71,7 @@
 									<a asp-action="Details" asp-route-id="@book.Id" class="btn btn-sm btn-outline-info rounded-pill px-4">
 										<i class="bi bi-eye"></i> View Details
 									</a>
-									@if (User.Identity?.IsAuthenticated == true)
+									@if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
 									{
 										<a asp-action="Edit" asp-route-id="@book.Id" class="btn btn-sm btn-outline-warning rounded-pill px-4">
 											<i class="bi bi-pencil"></i> Edit
