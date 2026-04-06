@@ -60,3 +60,18 @@
     color: #ffffff !important;
     text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
 }
+
+.admin-table {
+    background: rgba(0,0,0,0.6);
+    color: white;
+}
+
+    .admin-table tbody tr td {
+        color: white !important;
+        border-color: rgba(255,255,255,0.15);
+    }
+
+    .admin-table tbody tr:hover td {
+        color: white !important;
+        background: rgba(255,255,255,0.05);
+    }

@@ -1,4 +1,5 @@
-﻿using LibraCore.Infrastructure.Data.Entities;
+﻿using LibraCore.GCommon.Exceptions;
+using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
 using LibraCore.Services.Interfaces;
 using LibraCore.ViewModels.Author;
@@ -13,6 +14,7 @@ namespace LibraCore.Services
         {
             this.authorRepository = authorRepository;
         }
+
         public async Task<IEnumerable<AuthorViewModel>> GetAllAuthorsOrderedByNameAsync()
         {
             IEnumerable<Author> allAuthors = await authorRepository
@@ -28,6 +30,26 @@ namespace LibraCore.Services
                 .ToArray();
 
             return authorViewModels;
+        }
+
+        public async Task AddAuthorAsync(AuthorInputModel model)
+        {
+            Author? authorExists = await authorRepository.AuthorExistsAsync(model.Name);
+            if (authorExists != null)
+            {
+                throw new EntityAlreadyExistsException();
+            }
+
+            Author author = new Author 
+            { 
+                Name = model.Name 
+            };
+
+            bool success = await authorRepository.AddAuthorAsync(author);
+            if (!success)
+            {
+                throw new EntityPersistFailureException();
+            }
         }
     }
 }

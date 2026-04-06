@@ -6,5 +6,7 @@ namespace LibraCore.Services.Interfaces
     public interface IAuthorService
     {
         Task<IEnumerable<AuthorViewModel>> GetAllAuthorsOrderedByNameAsync();
+
+        Task AddAuthorAsync(AuthorInputModel model);
     }
 }

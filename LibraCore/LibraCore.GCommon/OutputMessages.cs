@@ -25,5 +25,13 @@
             public const string AddToFavoritesFailureMessage = "An error occurred while adding the book to your favorites. Please try again in a few minutes.";
             public const string RemoveFromFavoritesFailureMessage = "An error occurred while removing the book from your favorites. Please try again in a few minutes.";
         }
+
+        public static class Author
+        {
+            public const string AuthorAlreadyExistsMessage = "Author with name '{0}' already exists.";
+            public const string AuthorNotFoundMessage = "Author with id '{0}' was not found.";
+            public const string AddAuthorFailureMessage = "An error occurred while adding the author. Please try again.";
+            public const string DeleteAuthorFailureMessage = "An error occurred while deleting the author. Please try again.";
+        }
     }
 }
