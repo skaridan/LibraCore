@@ -1,4 +1,4 @@
-﻿namespace LibraCore.Services.ViewModels.Book
+﻿namespace LibraCore.ViewModels.Book
 {
     public class BookDetailsViewModel
     {

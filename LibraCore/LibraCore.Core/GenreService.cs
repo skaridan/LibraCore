@@ -1,7 +1,7 @@
 ﻿using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
 using LibraCore.Services.Interfaces;
-using LibraCore.Services.ViewModels.Book;
+using LibraCore.ViewModels.Book;
 
 namespace LibraCore.Services
 {

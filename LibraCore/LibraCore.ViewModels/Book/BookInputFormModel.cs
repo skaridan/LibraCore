@@ -4,7 +4,7 @@ using static LibraCore.GCommon.EntityValidation.Book;
 using static LibraCore.GCommon.OutputMessages.Book;
 using static LibraCore.GCommon.EntityValidation.Author;
 
-namespace LibraCore.Services.ViewModels.Book
+namespace LibraCore.ViewModels.Book
 {
     public class BookInputFormModel
     {

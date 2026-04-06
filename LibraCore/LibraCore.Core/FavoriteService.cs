@@ -1,9 +1,9 @@
 ﻿using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
-using LibraCore.ViewModels;
 
 using LibraCore.GCommon.Exceptions;
 using LibraCore.Services.Interfaces;
+using LibraCore.ViewModels.Favorite;
 
 namespace LibraCore.Services
 {

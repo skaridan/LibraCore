@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LibraCore.Services.ViewModels.Book
+namespace LibraCore.ViewModels.Book
 {
     public class BookGenreViewModel
     {

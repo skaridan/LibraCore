@@ -1,4 +1,4 @@
-﻿using LibraCore.Services.ViewModels.Book;
+﻿using LibraCore.ViewModels.Book;
 
 namespace LibraCore.Services.Interfaces
 {

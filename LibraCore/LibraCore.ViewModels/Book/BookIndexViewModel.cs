@@ -1,6 +1,6 @@
-﻿namespace LibraCore.ViewModels
+﻿namespace LibraCore.ViewModels.Book
 {
-    public class FavoriteViewModel
+    public class BookIndexViewModel
     {
         public Guid Id { get; set; }
 
@@ -11,5 +11,7 @@
         public decimal Price { get; set; }
 
         public string? ImageUrl { get; set; }
+
+        public bool IsFavorite { get; set; }
     }
 }

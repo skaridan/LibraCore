@@ -1,4 +1,4 @@
-namespace LibraCore.Services.ViewModels
+namespace LibraCore.ViewModels
 {
     public class ErrorViewModel
     {

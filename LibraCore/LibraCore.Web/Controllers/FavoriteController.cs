@@ -1,6 +1,7 @@
 ﻿using LibraCore.GCommon.Exceptions;
+using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Services.Interfaces;
-using LibraCore.ViewModels;
+using LibraCore.ViewModels.Favorite;
 using Microsoft.AspNetCore.Mvc;
 
 using static LibraCore.GCommon.OutputMessages.Favorite;
@@ -55,7 +56,7 @@ namespace LibraCore.Web.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Index), nameof(Book));
         }
 
         [HttpPost]

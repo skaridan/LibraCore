@@ -1,4 +1,4 @@
-﻿using LibraCore.ViewModels;
+﻿using LibraCore.ViewModels.Favorite;
 
 namespace LibraCore.Services.Interfaces
 {

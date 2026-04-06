@@ -1,4 +1,4 @@
-using LibraCore.Services.ViewModels;
+using LibraCore.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
