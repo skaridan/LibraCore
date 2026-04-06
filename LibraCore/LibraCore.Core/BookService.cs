@@ -1,12 +1,12 @@
 ﻿using LibraCore.GCommon.Exceptions;
 using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
-using LibraCore.Services.Services.Interfaces;
+using LibraCore.Services.Interfaces;
 using LibraCore.Services.ViewModels.Book;
 
 using static LibraCore.GCommon.ApplicationConstants;
 
-namespace LibraCore.Services.Services
+namespace LibraCore.Services
 {
     public class BookService : IBookService
     {

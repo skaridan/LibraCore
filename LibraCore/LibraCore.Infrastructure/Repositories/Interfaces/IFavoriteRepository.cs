@@ -10,7 +10,7 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
 
         Task<bool> AddUserBookAsync(UserBook userBook);
 
-        Task<bool> RemoveUserBookAsync(UserBook userBook);
+        Task<bool> SoftDeleteUserBookAsync(UserBook userBook);
 
         Task<bool> UpdateUserBookAsync(UserBook userBook);
     }

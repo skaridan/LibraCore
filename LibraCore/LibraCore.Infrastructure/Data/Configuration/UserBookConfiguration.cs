@@ -9,6 +9,8 @@ namespace LibraCore.Infrastructure.Data.Configuration
         public void Configure(EntityTypeBuilder<UserBook> entity)
         {
             entity.HasData(SeedUserBooks());
+
+            entity.HasQueryFilter(ub => ub.IsDeleted == false);
         }
 
         private static IEnumerable<UserBook> SeedUserBooks()

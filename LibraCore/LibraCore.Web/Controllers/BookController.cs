@@ -1,12 +1,12 @@
 ﻿using LibraCore.GCommon.Exceptions;
-using LibraCore.Services.Services.Interfaces;
+using LibraCore.Services.Interfaces;
 using LibraCore.Services.ViewModels.Book;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 using static LibraCore.GCommon.OutputMessages.Book;
 
-namespace LibraCore.Web.Controllers.Book
+namespace LibraCore.Web.Controllers
 {
     public class BookController : BaseController
     {

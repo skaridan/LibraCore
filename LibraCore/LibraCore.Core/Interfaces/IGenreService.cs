@@ -1,6 +1,6 @@
 ﻿using LibraCore.Services.ViewModels.Book;
 
-namespace LibraCore.Services.Repositories.Interfaces
+namespace LibraCore.Services.Interfaces
 {
     public interface IGenreService
     {

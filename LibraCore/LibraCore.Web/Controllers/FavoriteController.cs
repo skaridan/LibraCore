@@ -1,7 +1,5 @@
 ﻿using LibraCore.GCommon.Exceptions;
-using LibraCore.Infrastructure.Data.Entities;
-using LibraCore.Services.Services;
-using LibraCore.Services.Services.Interfaces;
+using LibraCore.Services.Interfaces;
 using LibraCore.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -61,9 +59,26 @@ namespace LibraCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Remove(Guid id)
+        public async Task<IActionResult> Remove([FromRoute(Name = "id")]Guid bookId)
         {
-            return View();
+            string userId = GetUserId()!;
+
+            try
+            {
+                await favoriteService.RemoveBookFromFavoritesAsync(userId, bookId);
+            }
+            catch (EntityNotFoundException enfe)
+            {
+                return NotFound();
+            }
+            catch (EntityPersistFailureException epfe)
+            {
+                logger.LogError(epfe, RemoveFromFavoritesFailureMessage);
+
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

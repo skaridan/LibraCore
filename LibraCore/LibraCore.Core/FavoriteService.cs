@@ -1,11 +1,11 @@
 ﻿using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
-using LibraCore.Services.Services.Interfaces;
 using LibraCore.ViewModels;
 
 using LibraCore.GCommon.Exceptions;
+using LibraCore.Services.Interfaces;
 
-namespace LibraCore.Services.Services
+namespace LibraCore.Services
 {
     public class FavoriteService : IFavoriteService
     {
@@ -73,6 +73,23 @@ namespace LibraCore.Services.Services
             }
 
             if (!successPersist)
+            {
+                throw new EntityPersistFailureException();
+            }
+        }
+
+        public async Task RemoveBookFromFavoritesAsync(string userId, Guid bookId)
+        {
+            UserBook? userBook = await favoriteRepository
+                .GetUserBookAsync(userId, bookId);
+            if (userBook == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
+            bool successDelete = await favoriteRepository
+                .SoftDeleteUserBookAsync(userBook);
+            if (!successDelete)
             {
                 throw new EntityPersistFailureException();
             }

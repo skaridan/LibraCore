@@ -14,10 +14,13 @@ namespace LibraCore.Infrastructure.Repositories
 
         public async Task<IEnumerable<UserBook>> GetAllUserBooksAsync(string userId)
         {
+            Guid userGuid = Guid.Parse(userId);
+
             return await DbContext
                 .UsersBooks
                 .AsNoTracking()
-                .Where(ub => ub.UserId.ToString().ToLower() == userId.ToLower())
+                .IgnoreQueryFilters()
+                .Where(ub => ub.UserId == userGuid && ub.IsDeleted == false)
                 .Include(ub => ub.Book)
                 .ThenInclude(ub => ub.Author)
                 .ToArrayAsync();
@@ -31,9 +34,11 @@ namespace LibraCore.Infrastructure.Repositories
 
             return resultCount == 1;
         }
-        public async Task<bool> RemoveUserBookAsync(UserBook userBook)
+        public async Task<bool> SoftDeleteUserBookAsync(UserBook userBook)
         {
-            DbContext.UsersBooks.Remove(userBook);
+            userBook.IsDeleted = true;
+
+            DbContext.UsersBooks.Update(userBook);
 
             int resultCount = await SaveChangesAsync();
 
@@ -46,6 +51,7 @@ namespace LibraCore.Infrastructure.Repositories
 
             UserBook? userBook = await DbContext
                  .UsersBooks
+                 .IgnoreQueryFilters()
                  .SingleOrDefaultAsync(ub => ub.UserId == userGuid &&
                  ub.BookId == bookId);
 

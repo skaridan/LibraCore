@@ -2,8 +2,8 @@ using LibraCore.Infrastructure.Data;
 using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories;
 using LibraCore.Infrastructure.Repositories.Interfaces;
-using LibraCore.Services.Services;
-using LibraCore.Services.Services.Interfaces;
+using LibraCore.Services;
+using LibraCore.Services.Interfaces;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

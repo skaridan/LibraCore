@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Common", "Common", "{5EBC20
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraCore.ApplicationConstants", "LibraCore.ApplicationConstants\LibraCore.ApplicationConstants.csproj", "{814CA0E8-99CB-4134-8EBC-7ED3CD489C1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibraCore.ViewModels", "LibraCore.ViewModels\LibraCore.ViewModels.csproj", "{335E83E2-E21E-4214-86B4-A01A9BBF507E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{814CA0E8-99CB-4134-8EBC-7ED3CD489C1D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{814CA0E8-99CB-4134-8EBC-7ED3CD489C1D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{814CA0E8-99CB-4134-8EBC-7ED3CD489C1D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{335E83E2-E21E-4214-86B4-A01A9BBF507E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{335E83E2-E21E-4214-86B4-A01A9BBF507E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{335E83E2-E21E-4214-86B4-A01A9BBF507E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{335E83E2-E21E-4214-86B4-A01A9BBF507E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -66,6 +72,7 @@ Global
 		{D9285E13-CE23-487E-90AE-7AE305C5D405} = {8F11619B-0D3E-43DE-9330-8E0F0EAE3002}
 		{0151B32F-0601-C135-6648-CDC929E324F7} = {500D0D01-04B5-4B27-9EE2-B9817DA75611}
 		{814CA0E8-99CB-4134-8EBC-7ED3CD489C1D} = {5EBC2008-033F-4D1E-B5E0-E793C766BB7A}
+		{335E83E2-E21E-4214-86B4-A01A9BBF507E} = {500D0D01-04B5-4B27-9EE2-B9817DA75611}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {1025858D-AB10-4F68-A153-7A69AC60DADA}

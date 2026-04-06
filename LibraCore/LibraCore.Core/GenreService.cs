@@ -1,9 +1,9 @@
 ﻿using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
-using LibraCore.Services.Repositories.Interfaces;
+using LibraCore.Services.Interfaces;
 using LibraCore.Services.ViewModels.Book;
 
-namespace LibraCore.Services.Repositories
+namespace LibraCore.Services
 {
     public class GenreService : IGenreService
     {

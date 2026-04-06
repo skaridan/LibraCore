@@ -1,6 +1,6 @@
 ﻿using LibraCore.Services.ViewModels.Book;
 
-namespace LibraCore.Services.Services.Interfaces
+namespace LibraCore.Services.Interfaces
 {
     public interface IBookService
     {
