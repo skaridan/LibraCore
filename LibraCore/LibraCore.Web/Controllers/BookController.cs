@@ -51,6 +51,7 @@ namespace LibraCore.Web.Controllers
 
         [Authorize(Roles = AdminRole)]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(BookInputFormModel formModel)
         {
             if (!ModelState.IsValid)

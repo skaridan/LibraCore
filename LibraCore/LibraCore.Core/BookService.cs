@@ -53,7 +53,7 @@ namespace LibraCore.Services
         public async Task AddBookAsync(BookInputFormModel model)
         {
             Author? author = await authorRepository
-                .AuthorExistsAsync(model.Author);
+                .AuthorExistsByNameAsync(model.Author);
             if (author == null)
             {
                 author = new Author
@@ -117,7 +117,7 @@ namespace LibraCore.Services
             }
 
             Author? author = await authorRepository
-                .AuthorExistsAsync(formModel.Author);
+                .AuthorExistsByNameAsync(formModel.Author);
 
             if (author == null)
             {

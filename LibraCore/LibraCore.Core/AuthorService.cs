@@ -34,15 +34,15 @@ namespace LibraCore.Services
 
         public async Task AddAuthorAsync(AuthorInputModel model)
         {
-            Author? authorExists = await authorRepository.AuthorExistsAsync(model.Name);
+            Author? authorExists = await authorRepository.AuthorExistsByNameAsync(model.Name);
             if (authorExists != null)
             {
                 throw new EntityAlreadyExistsException();
             }
 
-            Author author = new Author 
-            { 
-                Name = model.Name 
+            Author author = new Author
+            {
+                Name = model.Name
             };
 
             bool success = await authorRepository.AddAuthorAsync(author);
@@ -50,6 +50,40 @@ namespace LibraCore.Services
             {
                 throw new EntityPersistFailureException();
             }
+        }
+
+        public async Task SoftDeleteAuthorAsync(Guid id)
+        {
+            Author? author = await authorRepository
+                .GetAuthorByIdAsync(id);
+            if (author == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
+            bool success = await authorRepository.SoftDeleteAuthorAsync(author);
+            if (!success)
+            {
+                throw new EntityPersistFailureException();
+            }
+        }
+
+        public async Task<AuthorViewModel?> GetAuthorByIdAsync(Guid id)
+        {
+            Author? author = await authorRepository
+                .GetAuthorByIdAsync(id);
+            if (author == null)
+            {
+                return null;
+            }
+
+            AuthorViewModel authorViewModel = new AuthorViewModel
+            {
+                Id = author.Id,
+                Name = author.Name
+            };
+
+            return authorViewModel;
         }
     }
 }

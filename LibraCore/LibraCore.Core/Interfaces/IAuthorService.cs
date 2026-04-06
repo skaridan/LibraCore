@@ -8,5 +8,9 @@ namespace LibraCore.Services.Interfaces
         Task<IEnumerable<AuthorViewModel>> GetAllAuthorsOrderedByNameAsync();
 
         Task AddAuthorAsync(AuthorInputModel model);
+
+        Task SoftDeleteAuthorAsync(Guid id);
+
+        Task<AuthorViewModel?> GetAuthorByIdAsync(Guid id);
     }
 }

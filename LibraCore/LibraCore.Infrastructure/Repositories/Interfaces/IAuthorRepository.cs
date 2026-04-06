@@ -7,8 +7,12 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
     {
         Task<IEnumerable<Author>> GetAllAuthorsAsync();
 
-        Task<Author?> AuthorExistsAsync(string name);
+        Task<Author?> AuthorExistsByNameAsync(string name);
+
+        Task<Author?> GetAuthorByIdAsync(Guid id);
 
         Task<bool> AddAuthorAsync(Author author);
+
+        Task<bool> SoftDeleteAuthorAsync(Author author);
     }
 }

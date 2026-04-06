@@ -34,6 +34,7 @@ namespace LibraCore.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(AuthorInputModel model)
         {
             if (!ModelState.IsValid)
@@ -58,6 +59,48 @@ namespace LibraCore.Web.Areas.Admin.Controllers
                 logger.LogError(epfe, AddAuthorFailureMessage);
                 ModelState.AddModelError(string.Empty, AddAuthorFailureMessage);
                 return View(model);
+            }
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Delete(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            AuthorViewModel? model = await authorService.GetAuthorByIdAsync(id);
+            if (model == null)
+            {
+                return NotFound();
+            }
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Delete(Guid id, AuthorViewModel model)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            try
+            {
+                await authorService.SoftDeleteAuthorAsync(id);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (EntityNotFoundException)
+            {
+                return NotFound();
+            }
+            catch (EntityPersistFailureException epfe)
+            {
+                logger.LogError(epfe, DeleteAuthorFailureMessage);
+                return RedirectToAction(nameof(Index));
             }
         }
     }

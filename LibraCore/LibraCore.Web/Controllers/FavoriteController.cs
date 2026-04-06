@@ -31,6 +31,7 @@ namespace LibraCore.Web.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add([FromRoute(Name = "id")] Guid bookId)
         {
             string userId = GetUserId()!;
@@ -60,7 +61,8 @@ namespace LibraCore.Web.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Remove([FromRoute(Name = "id")]Guid bookId)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Remove([FromRoute(Name = "id")] Guid bookId)
         {
             string userId = GetUserId()!;
 

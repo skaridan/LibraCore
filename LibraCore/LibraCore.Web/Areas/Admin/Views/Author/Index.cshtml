@@ -35,12 +35,10 @@
                         <td>@(author.i + 1)</td>
                         <td>@author.a.Name</td>
                         <td>
-                            <form asp-action="Delete" asp-route-id="@author.a.Id" method="post"
-                                  onsubmit="return confirm('Are you sure you want to delete @author.a.Name?')">
-                                <button type="submit" class="btn btn-danger btn-sm rounded-pill w-100">
-                                    <i class="bi bi-trash"></i> Delete
-                                </button>
-                            </form>
+                            <a asp-action="Delete" asp-route-id="@author.a.Id"
+                               class="btn btn-danger btn-sm rounded-pill w-100">
+                                <i class="bi bi-trash"></i> Delete
+                            </a>
                         </td>
                     </tr>
                 }

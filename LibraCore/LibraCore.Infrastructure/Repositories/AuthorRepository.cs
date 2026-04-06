@@ -16,11 +16,12 @@ namespace LibraCore.Infrastructure.Repositories
         {
             return await DbContext
                 .Authors
+                .Where(a => a.IsDeleted == false)
                 .AsNoTracking()
                 .ToArrayAsync();
         }
 
-        public async Task<Author?> AuthorExistsAsync(string name)
+        public async Task<Author?> AuthorExistsByNameAsync(string name)
         {
             Author? author = await DbContext
                 .Authors
@@ -37,5 +38,24 @@ namespace LibraCore.Infrastructure.Repositories
             int resultCount = await SaveChangesAsync();
             return resultCount == 1;
         }
+        public async Task<Author?> GetAuthorByIdAsync(Guid id)
+        {
+            return await DbContext
+                .Authors
+                .AsNoTracking()
+                .SingleOrDefaultAsync(a => a.Id == id && a.IsDeleted == false);
+        }
+
+        public async Task<bool> SoftDeleteAuthorAsync(Author author)
+        {
+            author.IsDeleted = true;
+
+            DbContext.Authors.Update(author);
+
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
+        }
+
     }
 }

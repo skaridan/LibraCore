@@ -37,7 +37,7 @@ namespace LibraCore.Infrastructure.Repositories
                 .Books
                 .Include(b => b.Author)
                 .Include(b => b.Genre)
-                .SingleOrDefaultAsync(b => b.Id == id);
+                .SingleOrDefaultAsync(b => b.Id == id && b.IsDeleted == false);
         }
 
         public async Task<bool> ExistsByIdAsync(Guid id)
