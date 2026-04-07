@@ -33,5 +33,12 @@
             public const string AddAuthorFailureMessage = "An error occurred while adding the author. Please try again.";
             public const string DeleteAuthorFailureMessage = "An error occurred while deleting the author. Please try again.";
         }
+        public static class Review
+        {
+            public const string CommentRequired = "Please write a comment.";
+            public const string RatingRequired = "Please select a rating.";
+            public const string AddReviewFailureMessage = "An error occurred while adding the review. Please try again.";
+            public const string UnexpectedErrorMessage = "Unexpected error while adding a review.";
+        }
     }
 }

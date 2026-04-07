@@ -1,0 +1,26 @@
+﻿.review-card {
+    background: white !important;
+    border-radius: 20px !important;
+    border: none !important;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1) !important;
+    transition: all 0.3s ease !important;
+}
+
+    .review-card:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.15) !important;
+    }
+
+.review-stars i {
+    font-size: 1.1rem;
+}
+
+.review-username {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.review-comment {
+    font-size: 0.95rem;
+    line-height: 1.6;
+}

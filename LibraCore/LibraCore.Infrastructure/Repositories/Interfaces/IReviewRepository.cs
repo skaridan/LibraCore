@@ -5,5 +5,7 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
     public interface IReviewRepository
     {
         Task<IEnumerable<Review>> GetAllReviewsByBookIdAsync(Guid bookId);
+
+        Task<bool> AddReviewAsync(Review review);
     }
 }

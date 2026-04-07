@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using static LibraCore.GCommon.EntityValidation.Rating;
+using static LibraCore.GCommon.EntityValidation.Review;
 
 namespace LibraCore.Infrastructure.Data.Entities
 {

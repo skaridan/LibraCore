@@ -27,5 +27,14 @@ namespace LibraCore.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToArrayAsync();
         }
+
+        public async Task<bool> AddReviewAsync(Review review)
+        {
+            await DbContext.Reviews.AddAsync(review);
+
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
+        }
     }
 }

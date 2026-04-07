@@ -25,7 +25,7 @@
             public const int GenreNameMaxLength = 80;
         }
 
-        public static class Rating
+        public static class Review
         {
             public const int MinRating = 1;
 

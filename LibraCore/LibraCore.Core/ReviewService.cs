@@ -1,4 +1,5 @@
-﻿using LibraCore.Infrastructure.Data.Entities;
+﻿using LibraCore.GCommon.Exceptions;
+using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
 using LibraCore.Services.Interfaces;
 using LibraCore.ViewModels.Review;
@@ -13,6 +14,7 @@ namespace LibraCore.Services
         {
             this.reviewRepository = reviewRepository;
         }
+
         public async Task<IEnumerable<ReviewViewModel>> GetAllReviewsByBookIdAsync(Guid bookId)
         {
             IEnumerable<Review> reviews = await reviewRepository
@@ -31,6 +33,23 @@ namespace LibraCore.Services
                  .ToArray();
 
             return reviewViewModels;
+        }
+
+        public async Task AddReviewAsync(ReviewInputModel model, string userId)
+        {
+            Review newReview = new Review
+            {
+                BookId = model.BookId,
+                Rating = model.Rating,
+                Comment = model.Comment,
+                UserId = Guid.Parse(userId)
+            };
+
+            bool success = await reviewRepository.AddReviewAsync(newReview);
+            if (!success)
+            {
+                throw new EntityPersistFailureException();
+            }
         }
     }
 }
