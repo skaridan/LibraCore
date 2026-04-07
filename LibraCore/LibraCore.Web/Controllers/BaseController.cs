@@ -5,6 +5,7 @@ using System.Security.Claims;
 namespace LibraCore.Web.Controllers
 {
     [Authorize]
+    [AutoValidateAntiforgeryToken]
     public class BaseController : Controller
     {
         public string? GetUserId()

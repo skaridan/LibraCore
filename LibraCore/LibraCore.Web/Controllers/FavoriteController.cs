@@ -31,7 +31,6 @@ namespace LibraCore.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add([FromRoute(Name = "id")] Guid bookId)
         {
             string userId = GetUserId()!;
@@ -39,10 +38,14 @@ namespace LibraCore.Web.Controllers
             try
             {
                 await favoriteService.AddToFavoritesAsync(userId, bookId);
+
+                TempData["Success"] = AddToFavoritesSuccessMessage;
             }
             catch (EntityAlreadyExistsException eaee)
             {
                 logger.LogError(eaee, string.Format(BookAlreadyInFavoritesMessage, bookId, userId));
+
+                TempData["Error"] = string.Format(BookAlreadyInFavoritesMessage, bookId, userId);
 
                 return BadRequest();
             }
@@ -54,6 +57,8 @@ namespace LibraCore.Web.Controllers
             {
                 logger.LogError(epfe, string.Format(AddToFavoritesFailureMessage));
 
+                TempData["Error"] = AddToFavoritesFailureMessage;
+
                 return RedirectToAction(nameof(Index));
             }
 
@@ -61,7 +66,6 @@ namespace LibraCore.Web.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Remove([FromRoute(Name = "id")] Guid bookId)
         {
             string userId = GetUserId()!;
@@ -69,6 +73,8 @@ namespace LibraCore.Web.Controllers
             try
             {
                 await favoriteService.RemoveBookFromFavoritesAsync(userId, bookId);
+
+                TempData["Success"] = RemoveFromFavoritesSuccessMessage;
             }
             catch (EntityNotFoundException enfe)
             {

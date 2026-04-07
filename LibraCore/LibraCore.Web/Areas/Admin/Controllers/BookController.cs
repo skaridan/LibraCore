@@ -34,7 +34,6 @@ namespace LibraCore.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Add(BookInputFormModel formModel)
         {
             if (!ModelState.IsValid)
@@ -88,7 +87,6 @@ namespace LibraCore.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(Guid id, BookInputFormModel formModel)
         {
             if (!ModelState.IsValid)
@@ -143,7 +141,6 @@ namespace LibraCore.Web.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        [ValidateAntiForgeryToken]
         public async Task<IActionResult> Delete(Guid id, BookDetailsViewModel? viewModel)
         {
             if (id == Guid.Empty)
@@ -155,7 +152,7 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             {
                 await bookService.SoftDeleteBookAsync(id);
 
-                return RedirectToAction("Index", "Book", new { area = ""});
+                return RedirectToAction("Index", "Book", new { area = "" });
             }
             catch (EntityNotFoundException)
             {

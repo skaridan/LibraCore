@@ -7,6 +7,7 @@ namespace LibraCore.Web.Areas.Admin.Controllers
 {
     [Area(AdminRole)]
     [Authorize(Roles = AdminRole)]
+    [AutoValidateAntiforgeryToken]
     public abstract class BaseAdminController : Controller
     {
         public string? GetUserId()
