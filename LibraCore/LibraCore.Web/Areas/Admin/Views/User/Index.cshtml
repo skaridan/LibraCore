@@ -1,0 +1,44 @@
+﻿@model IEnumerable<UserViewModel>
+
+@{
+    ViewData["Title"] = "All Users";
+}
+
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-5 p-4 bg-white rounded-4 shadow-sm border-start border-5 border-primary">
+        <div>
+            <h1 class="fw-bold text-dark mb-0">All Users</h1>
+            <p class="text-muted mb-0">Manage client profiles</p>
+        </div>
+    </div>
+
+    @if (!Model.Any())
+    {
+        <div class="feature-card text-center py-5">
+            <i class="bi bi-people text-muted d-block mb-3" style="font-size: 3rem;"></i>
+            <h4 class="fw-bold text-dark">No users found.</h4>
+        </div>
+    }
+    else
+    {
+        <div class="row g-4">
+            @foreach (var user in Model)
+            {
+                <div class="col-12">
+                    <div class="feature-card p-4 d-flex justify-content-between align-items-center">
+                        <div class="d-flex align-items-center gap-3">
+                            <div class="bg-primary bg-opacity-10 text-primary rounded-circle d-flex align-items-center justify-content-center"
+                                 style="width: 48px; height: 48px;">
+                                <i class="bi bi-person-fill fs-5"></i>
+                            </div>
+                            <div>
+                                <h5 class="fw-bold text-dark mb-0">@user.UserName</h5>
+                                <p class="text-muted mb-0"><i class="bi bi-envelope me-1"></i>@user.Email</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>
