@@ -46,32 +46,8 @@
 					@Model.Description
 				</p>
 
-				<div class="d-flex gap-3 pt-4 border-top">
-					<a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4 py-2">
-						<i class="bi bi-arrow-left"></i> Back to Catalog
-					</a>
+				<partial name="_BookDetailsActionsPartial" model="Model" />
 
-					@if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Admin"))
-					{
-						<form asp-controller="Order" asp-action="Buy" method="post">
-							<input type="hidden" name="bookId" value="@Model.Id" />
-							<button type="submit" class="btn btn-primary rounded-pill px-4 py-2 fw-bold shadow-sm">
-								<i class="bi bi-bag-plus"></i> Buy
-							</button>
-						</form>
-					}
-
-					@if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
-					{
-						<a asp-area="Admin" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning rounded-pill px-4 py-2 fw-bold text-white shadow-sm">
-							<i class="bi bi-pencil-square"></i> Edit Book
-						</a>
-
-						<a asp-area="Admin" asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger rounded-pill px-4 py-2 fw-bold shadow-sm">
-							<i class="bi bi-trash"></i> Delete Book
-						</a>
-					}
-				</div>
 			</div>
 		</div>
 	</div>
