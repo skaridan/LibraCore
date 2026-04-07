@@ -39,5 +39,23 @@ namespace LibraCore.Infrastructure.Repositories
 
             return resultCount == 1;
         }
+
+        public async Task<IEnumerable<Order>> GetAllOrdersAsync()
+        {
+            return await DbContext
+                .Orders
+                .Include(o => o.User)
+                .AsNoTracking()
+                .ToArrayAsync();
+        }
+
+        public async Task<bool> UpdateOrderStatusAsync(Order order)
+        {
+            DbContext.Orders.Update(order);
+
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
+        }
     }
 }

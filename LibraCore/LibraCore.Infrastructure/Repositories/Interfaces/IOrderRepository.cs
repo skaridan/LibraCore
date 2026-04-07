@@ -4,10 +4,15 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
 {
     public interface IOrderRepository
     {
+
         Task<IEnumerable<Order>> GetUserOrdersAsync(Guid userId);
 
         Task<Order?> GetOrderByIdAsync(Guid id);
 
         Task<bool> AddOrderAsync(Order order);
+
+        Task<IEnumerable<Order>> GetAllOrdersAsync();
+
+        Task<bool> UpdateOrderStatusAsync(Order order);
     }
 }

@@ -1,4 +1,5 @@
-﻿using LibraCore.ViewModels.Order;
+﻿using LibraCore.Infrastructure.Data.Enums;
+using LibraCore.ViewModels.Order;
 
 namespace LibraCore.Services.Interfaces
 {
@@ -9,5 +10,9 @@ namespace LibraCore.Services.Interfaces
         Task<OrderDetailsViewModel?> GetOrderDetailsAsync(Guid id);
 
         Task CreateOrderAsync(Guid bookId, string userId);
+
+        Task<IEnumerable<OrderViewModel>> GetAllOrdersAsync();
+
+        Task UpdateOrderStatusAsync(Guid id, OrderStatus newStatus);
     }
 }

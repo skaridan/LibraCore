@@ -1,5 +1,6 @@
 ﻿using LibraCore.GCommon.Exceptions;
 using LibraCore.Infrastructure.Data.Entities;
+using LibraCore.Infrastructure.Data.Enums;
 using LibraCore.Infrastructure.Repositories.Interfaces;
 using LibraCore.Services.Interfaces;
 using LibraCore.ViewModels.Order;
@@ -90,6 +91,42 @@ namespace LibraCore.Services
             order.OrderItems.Add(orderItem);
 
             bool success = await orderRepository.AddOrderAsync(order);
+            if (!success)
+            {
+                throw new EntityPersistFailureException();
+            }
+        }
+
+        public async Task<IEnumerable<OrderViewModel>> GetAllOrdersAsync()
+        {
+            IEnumerable<Order> orders = await orderRepository.GetAllOrdersAsync();
+
+            IEnumerable<OrderViewModel> orderViewModels = orders
+                .Select(o => new OrderViewModel
+                {
+                    Id = o.Id,
+                    OrderDate = o.OrderDate,
+                    TotalPrice = o.TotalPrice,
+                    Status = o.Status.ToString()
+                })
+                .OrderByDescending(o => o.OrderDate)
+                .ToArray();
+
+            return orderViewModels;
+        }
+
+        public async Task UpdateOrderStatusAsync(Guid id, OrderStatus newStatus)
+        {
+            Order? order = await orderRepository
+                .GetOrderByIdAsync(id);
+            if (order == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
+            order.Status = newStatus;
+
+            bool success = await orderRepository.UpdateOrderStatusAsync(order);
             if (!success)
             {
                 throw new EntityPersistFailureException();

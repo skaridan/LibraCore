@@ -77,7 +77,7 @@
 										<i class="bi bi-chat-left-text"></i> Reviews
 									</a>
 
-									@if (User.Identity?.IsAuthenticated == true)
+									@if (User.Identity?.IsAuthenticated == true && !User.IsInRole("Admin"))
 									{
 										<form asp-controller="Order" asp-action="Buy" method="post" class="m-0">
 											<input type="hidden" name="bookId" value="@book.Id" />
