@@ -22,12 +22,37 @@
 		}
 	</div>
 
+	<div class="row mb-4">
+		<div class="col-md-6 offset-md-3">
+			<form method="get" asp-action="Index" class="d-flex gap-2">
+				<div class="input-group shadow-sm">
+					<input type="text"
+						   name="searchTerm"
+						   value="@ViewBag.SearchTerm"
+						   class="form-control rounded-pill-start px-4"
+						   placeholder="Search by title..." />
+					<button type="submit" class="btn btn-primary rounded-pill-end px-4">
+						<i class="bi bi-search"></i> Search
+					</button>
+				</div>
+			</form>
+			@if (!string.IsNullOrEmpty(ViewBag.SearchTerm))
+			{
+				<div class="text-center mt-2">
+					<a asp-action="Index" class="text-decoration-none small text-secondary">
+						<i class="bi bi-x-circle"></i> Clear search results
+					</a>
+				</div>
+			}
+		</div>
+	</div>
+
 	@if (!Model.Any())
 	{
 		<div class="feature-card text-center py-5">
 			<i class="bi bi-book text-muted d-block mb-3" style="font-size: 3rem;"></i>
 			<h4 class="fw-bold text-dark">No books found.</h4>
-			<p class="text-muted">Start by adding your first masterpiece to the collection!</p>
+			<p class="text-muted">Try a different search or add a new book!</p>
 		</div>
 	}
 	else
@@ -37,7 +62,6 @@
 			{
 				<div class="col-12">
 					<div class="feature-card d-flex align-items-center p-0 overflow-hidden" style="min-height: 180px;">
-
 						<div class="book-list-cover-wrapper flex-shrink-0">
 							@if (!string.IsNullOrWhiteSpace(book.ImageUrl))
 							{
@@ -112,6 +136,69 @@
 					</div>
 				</div>
 			}
+		</div>
+
+		<div class="d-flex justify-content-center mt-5 mb-5">
+			<div class="d-inline-flex align-items-center gap-2 px-4 py-2 bg-white rounded-pill shadow-lg border border-primary border-opacity-25">
+
+				@if (ViewBag.CurrentPage > 1)
+				{
+					<a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage - 1)" asp-route-searchTerm="@ViewBag.SearchTerm"
+					   class="btn btn-sm btn-outline-primary rounded-circle border-0 p-2">
+						<i class="bi bi-chevron-left"></i>
+					</a>
+				}
+
+				@{
+					int currentPage = ViewBag.CurrentPage;
+					int totalPages = ViewBag.TotalPages;
+					int showRange = 1;
+
+					if (totalPages > 1)
+					{
+						if (currentPage > showRange + 1)
+						{
+							<a asp-action="Index" asp-route-page="1" asp-route-searchTerm="@ViewBag.SearchTerm"
+							   class="btn btn-sm btn-outline-secondary rounded-circle border-0">1</a>
+							if (currentPage > showRange + 2)
+							{
+								<span class="text-muted small px-1">...</span>
+							}
+						}
+
+						for (int i = Math.Max(1, currentPage - showRange); i <= Math.Min(totalPages, currentPage + showRange); i++)
+						{
+							if (i == currentPage)
+							{
+								<span class="btn btn-sm btn-primary rounded-circle fw-bold shadow-sm">@i</span>
+							}
+							else
+							{
+								<a asp-action="Index" asp-route-page="@i" asp-route-searchTerm="@ViewBag.SearchTerm"
+								   class="btn btn-sm btn-outline-secondary rounded-circle border-0">@i</a>
+							}
+						}
+
+						if (currentPage < totalPages - showRange)
+						{
+							if (currentPage < totalPages - showRange - 1)
+							{
+								<span class="text-muted small px-1">...</span>
+							}
+							<a asp-action="Index" asp-route-page="@totalPages" asp-route-searchTerm="@ViewBag.SearchTerm"
+							   class="btn btn-sm btn-outline-secondary rounded-circle border-0">@totalPages</a>
+						}
+					}
+				}
+
+				@if (ViewBag.CurrentPage < ViewBag.TotalPages)
+				{
+					<a asp-action="Index" asp-route-page="@(ViewBag.CurrentPage + 1)" asp-route-searchTerm="@ViewBag.SearchTerm"
+					   class="btn btn-sm btn-primary rounded-pill px-3 fw-bold shadow-sm">
+						Next <i class="bi bi-chevron-right"></i>
+					</a>
+				}
+			</div>
 		</div>
 	}
 </div>
