@@ -1,5 +1,4 @@
-﻿@using LibraCore.ViewModels.Book
-@model BookInputFormModel
+﻿@model BookInputFormModel
 
 @{
 	ViewData["Title"] = "Add New Book";
@@ -72,7 +71,7 @@
 						<button type="submit" class="btn btn-primary rounded-pill px-5 flex-grow-1 fw-bold">
 							Create Book
 						</button>
-						<a asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4">
+						<a asp-area="" asp-controller="Book" asp-action="Index" class="btn btn-outline-secondary rounded-pill px-4">
 							Cancel
 						</a>
 					</div>

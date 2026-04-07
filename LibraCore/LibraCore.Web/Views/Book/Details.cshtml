@@ -52,11 +52,11 @@
 					</a>
 					@if (User.Identity?.IsAuthenticated == true && User.IsInRole("Admin"))
 					{
-						<a asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning rounded-pill px-4 py-2 fw-bold text-white shadow-sm">
+						<a asp-area="Admin" asp-controller="Book" asp-action="Edit" asp-route-id="@Model.Id" class="btn btn-warning rounded-pill px-4 py-2 fw-bold text-white shadow-sm">
 							<i class="bi bi-pencil-square"></i> Edit Book
 						</a>
 
-						<a asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger rounded-pill px-4 py-2 fw-bold shadow-sm">
+						<a asp-area="Admin" asp-controller="Book" asp-action="Delete" asp-route-id="@Model.Id" class="btn btn-danger rounded-pill px-4 py-2 fw-bold shadow-sm">
 							<i class="bi bi-trash"></i> Delete Book
 						</a>
 					}

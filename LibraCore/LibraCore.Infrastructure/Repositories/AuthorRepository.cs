@@ -26,7 +26,7 @@ namespace LibraCore.Infrastructure.Repositories
             Author? author = await DbContext
                 .Authors
                 .AsNoTracking()
-                .SingleOrDefaultAsync(a => a.Name.ToLower() == name.ToLower());
+                .SingleOrDefaultAsync(a => a.Name.ToLower() == name.ToLower() && a.IsDeleted == false);
 
             return author;
         }

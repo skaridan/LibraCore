@@ -1,5 +1,4 @@
-﻿@using LibraCore.ViewModels.Book
-@model BookDetailsViewModel
+﻿@model BookDetailsViewModel
 
 <div class="container mt-5">
 	<div class="row justify-content-center">
@@ -15,7 +14,7 @@
 
 				<div class="d-grid gap-2">
 					<button type="submit" class="btn btn-danger btn-lg rounded-pill">Yes, Delete</button>
-					<a asp-action="Details" asp-route-id="@Model.Id" class="btn btn-outline-secondary btn-lg rounded-pill">No, Keep it</a>
+					<a asp-area="" asp-controller="Book" asp-action="Index" class="btn btn-outline-secondary btn-lg rounded-pill">No, Keep it</a>
 				</div>
 			</form>
 

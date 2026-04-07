@@ -1,38 +1,38 @@
 <Project Sdk="Microsoft.NET.Sdk.Web">
 
-  <PropertyGroup>
-    <TargetFramework>net8.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <UserSecretsId>aspnet-LibraCore.Web-23a9ca89-2397-411e-9949-88d20e78015e</UserSecretsId>
-  </PropertyGroup>
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<Nullable>enable</Nullable>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<UserSecretsId>aspnet-LibraCore.Web-23a9ca89-2397-411e-9949-88d20e78015e</UserSecretsId>
+	</PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.23" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.23" />
-    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.23" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.23">
-      <PrivateAssets>all</PrivateAssets>
-      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
-    </PackageReference>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="8.0.23" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="8.0.23" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.23" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="8.0.23" />
-  </ItemGroup>
+	<ItemGroup>
+		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.23" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.23" />
+		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.23" />
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.23">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+		<PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="8.0.23">
+			<PrivateAssets>all</PrivateAssets>
+			<IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+		</PackageReference>
+	</ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\LibraCore.ApplicationConstants\LibraCore.ApplicationConstants.csproj" />
-    <ProjectReference Include="..\LibraCore.Core\LibraCore.Services.csproj" />
-    <ProjectReference Include="..\LibraCore.GCommon\LibraCore.GCommon.csproj" />
-    <ProjectReference Include="..\LibraCore.Infrastructure\LibraCore.Infrastructure.csproj" />
-    <ProjectReference Include="..\LibraCore.ViewModels\LibraCore.ViewModels.csproj" />
-  </ItemGroup>
+	<ItemGroup>
+		<ProjectReference Include="..\LibraCore.ApplicationConstants\LibraCore.ApplicationConstants.csproj" />
+		<ProjectReference Include="..\LibraCore.Core\LibraCore.Services.csproj" />
+		<ProjectReference Include="..\LibraCore.GCommon\LibraCore.GCommon.csproj" />
+		<ProjectReference Include="..\LibraCore.Infrastructure\LibraCore.Infrastructure.csproj" />
+		<ProjectReference Include="..\LibraCore.ViewModels\LibraCore.ViewModels.csproj" />
+	</ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Areas\Admin\Data\" />
-    <Folder Include="Areas\Admin\Models\" />
-    <Folder Include="wwwroot\images\" />
-  </ItemGroup>
+	<ItemGroup>
+		<Folder Include="Areas\Admin\Data\" />
+		<Folder Include="Areas\Admin\Models\" />
+		<Folder Include="wwwroot\images\" />
+	</ItemGroup>
 
 </Project>
