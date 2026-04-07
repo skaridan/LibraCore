@@ -59,9 +59,11 @@ namespace LibraCore.Web
             }
             else
             {
-                app.UseExceptionHandler("/Home/Error");
+                app.UseExceptionHandler("/Home/Error/500");
                 app.UseHsts();
             }
+
+            app.UseStatusCodePagesWithReExecute("/Home/Error/{0}");
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
