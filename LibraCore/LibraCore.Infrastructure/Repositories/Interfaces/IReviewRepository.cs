@@ -6,6 +6,10 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
     {
         Task<IEnumerable<Review>> GetAllReviewsByBookIdAsync(Guid bookId);
 
+        Task<Review?> GetReviewByIdAsync(Guid id);
+
         Task<bool> AddReviewAsync(Review review);
+
+        Task<bool> SoftDeleteReviewAsync(Review review);
     }
 }

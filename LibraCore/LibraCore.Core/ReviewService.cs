@@ -51,5 +51,42 @@ namespace LibraCore.Services
                 throw new EntityPersistFailureException();
             }
         }
+
+        public async Task SoftDeleteReviewAsync(Guid id)
+        {
+            Review? review = await reviewRepository
+                .GetReviewByIdAsync(id);
+            if (review == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
+            bool success = await reviewRepository.SoftDeleteReviewAsync(review);
+            if (!success)
+            {
+                throw new EntityPersistFailureException();
+            }
+        }
+
+        public async Task<ReviewViewModel?> GetReviewByIdAsync(Guid id)
+        {
+            Review? review = await reviewRepository
+                .GetReviewByIdAsync(id);
+            if (review == null)
+            {
+                return null;
+            }
+
+            ReviewViewModel model = new ReviewViewModel
+            {
+                Id = review.Id,
+                BookId = review.BookId,
+                UserName = review.User.UserName!,
+                Rating = review.Rating,
+                Comment = review.Comment
+            };
+
+            return model;
+        }
     }
 }

@@ -2,11 +2,6 @@
 using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LibraCore.Infrastructure.Repositories
 {
@@ -28,12 +23,31 @@ namespace LibraCore.Infrastructure.Repositories
                 .ToArrayAsync();
         }
 
+        public async Task<Review?> GetReviewByIdAsync(Guid id)
+        {
+            return await DbContext
+                .Reviews
+                .Include(r => r.User)
+                .Include(r => r.Book)
+                .SingleOrDefaultAsync(r => r.Id == id && r.IsDeleted == false);
+        }
+
         public async Task<bool> AddReviewAsync(Review review)
         {
             await DbContext.Reviews.AddAsync(review);
 
             int resultCount = await SaveChangesAsync();
 
+            return resultCount == 1;
+        }
+
+        public async Task<bool> SoftDeleteReviewAsync(Review review)
+        {
+            review.IsDeleted = true;
+
+            DbContext.Reviews.Update(review);
+
+            int resultCount = await SaveChangesAsync();
             return resultCount == 1;
         }
     }
