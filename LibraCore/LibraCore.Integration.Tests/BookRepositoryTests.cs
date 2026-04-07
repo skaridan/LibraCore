@@ -8,8 +8,8 @@ namespace LibraCore.Tests.Repositories
     [TestFixture]
     public class BookRepositoryTests
     {
-        private LibraCoreDbContext dbContext;
-        private BookRepository bookRepository;
+        private LibraCoreDbContext dbContext = null!;
+        private BookRepository bookRepository = null!;
 
         [SetUp]
         public void SetUp()
@@ -32,14 +32,31 @@ namespace LibraCore.Tests.Repositories
         }
 
         [Test]
-        public async Task GetAllBooksAsync_ShouldReturnOnlyActiveBooks()
+        public async Task GetAllBooksAsync_ShouldReturnOnlyNonDeletedBooks()
         {
             // Arrange
             List<Book> books = new List<Book>
             {
-                new Book { Id = Guid.NewGuid(), Title = "Active", IsDeleted = false, AuthorId = Guid.NewGuid(), GenreId = Guid.NewGuid() },
-                new Book { Id = Guid.NewGuid(), Title = "Deleted", IsDeleted = true, AuthorId = Guid.NewGuid(), GenreId = Guid.NewGuid() }
+                new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Active Book",
+                    Description = "A valid description for the active book.",
+                    IsDeleted = false,
+                    AuthorId = Guid.NewGuid(),
+                    GenreId = Guid.NewGuid()
+                },
+                new Book
+                {
+                    Id = Guid.NewGuid(),
+                    Title = "Deleted Book",
+                    Description = "A valid description for the deleted book.",
+                    IsDeleted = true,
+                    AuthorId = Guid.NewGuid(),
+                    GenreId = Guid.NewGuid()
+                }
             };
+
             await dbContext.Books.AddRangeAsync(books);
             await dbContext.SaveChangesAsync();
 
@@ -50,23 +67,26 @@ namespace LibraCore.Tests.Repositories
             Assert.Multiple(() =>
             {
                 Assert.That(result.Count(), Is.EqualTo(1));
-                Assert.That(result.First().Title, Is.EqualTo("Active"));
+                Assert.That(result.First().Title, Is.EqualTo("Active Book"));
+                Assert.That(result.Any(b => b.Title == "Deleted Book"), Is.False);
             });
         }
 
         [Test]
-        public async Task GetBookByIdAsync_ShouldReturnNull_WhenBookIsSoftDeleted()
+        public async Task GetBookByIdAsync_ShouldReturnNull_IfBookIsDeleted()
         {
             // Arrange
             Guid bookId = Guid.NewGuid();
             Book book = new Book
             {
                 Id = bookId,
-                Title = "Test",
+                Title = "Ghost Book",
+                Description = "This book has been soft-deleted from the system.",
                 IsDeleted = true,
                 AuthorId = Guid.NewGuid(),
                 GenreId = Guid.NewGuid()
             };
+
             await dbContext.Books.AddAsync(book);
             await dbContext.SaveChangesAsync();
 
@@ -78,15 +98,16 @@ namespace LibraCore.Tests.Repositories
         }
 
         [Test]
-        public async Task AddBookAsync_ShouldSaveBookToDatabase()
+        public async Task AddBookAsync_ShouldActuallyPersistData()
         {
             // Arrange
             Book book = new Book
             {
                 Id = Guid.NewGuid(),
                 Title = "New Book",
+                Description = "A newly added book with a valid description.",
                 AuthorId = Guid.NewGuid(),
-                GenreId = Guid.NewGuid() 
+                GenreId = Guid.NewGuid()
             };
 
             // Act
@@ -96,18 +117,20 @@ namespace LibraCore.Tests.Repositories
             Assert.Multiple(async () =>
             {
                 Assert.That(success, Is.True);
-                Assert.That(await dbContext.Books.CountAsync(), Is.EqualTo(1));
+                int count = await dbContext.Books.CountAsync();
+                Assert.That(count, Is.EqualTo(1));
             });
         }
 
         [Test]
-        public async Task SoftDeleteBookAsync_ShouldSetFlagToTrue()
+        public async Task SoftDeleteBookAsync_ShouldChangeIsDeletedProperty()
         {
             // Arrange
             Book book = new Book
             {
                 Id = Guid.NewGuid(),
-                Title = "To Delete",
+                Title = "To Be Deleted",
+                Description = "This book is about to be soft-deleted from the system.",
                 IsDeleted = false,
                 AuthorId = Guid.NewGuid(),
                 GenreId = Guid.NewGuid()
@@ -124,29 +147,31 @@ namespace LibraCore.Tests.Repositories
                 Assert.That(result, Is.True);
                 Assert.That(book.IsDeleted, Is.True);
 
-                var dbBook = dbContext.Books.IgnoreQueryFilters().FirstOrDefault(b => b.Id == book.Id);
+                Book? dbBook = dbContext.Books.IgnoreQueryFilters().FirstOrDefault(b => b.Id == book.Id);
                 Assert.That(dbBook, Is.Not.Null);
                 Assert.That(dbBook!.IsDeleted, Is.True);
             });
         }
 
         [Test]
-        public async Task ExistsByIdAsync_ShouldReturnTrue_EvenIfDeleted()
+        public async Task ExistsByIdAsync_ShouldReturnTrue_WhenBookExistsRegardlessOfStatus()
         {
             // Arrange
-            var id = Guid.NewGuid();
-            await dbContext.Books.AddAsync(new Book
+            Guid bookId = Guid.NewGuid();
+            Book book = new Book
             {
-                Id = id,
+                Id = bookId,
                 Title = "Exists",
+                Description = "This book exists in the database even though it is soft-deleted.",
                 IsDeleted = true,
                 AuthorId = Guid.NewGuid(),
-                GenreId = Guid.NewGuid() 
-            });
+                GenreId = Guid.NewGuid()
+            };
+            await dbContext.Books.AddAsync(book);
             await dbContext.SaveChangesAsync();
 
             // Act
-            bool exists = await bookRepository.ExistsByIdAsync(id);
+            bool exists = await bookRepository.ExistsByIdAsync(bookId);
 
             // Assert
             Assert.That(exists, Is.True);
