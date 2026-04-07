@@ -23,5 +23,23 @@ namespace LibraCore.Web.Controllers
 
             return View(orders);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            if (id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+
+            OrderDetailsViewModel? order = await orderService.GetOrderDetailsAsync(id);
+
+            if (order == null)
+            {
+                return NotFound();
+            }
+
+            return View(order);
+        }
     }
 }

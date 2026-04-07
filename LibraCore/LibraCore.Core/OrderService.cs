@@ -34,5 +34,35 @@ namespace LibraCore.Services
 
             return orderViewModels;
         }
+
+        public async Task<OrderDetailsViewModel?> GetOrderDetailsAsync(Guid id)
+        {
+            Order? order = await orderRepository.GetOrderByIdAsync(id);
+            if (order == null)
+            {
+                return null;
+            }
+
+            IEnumerable<OrderItemViewModel> items = order.OrderItems
+                .Select(oi => new OrderItemViewModel
+                {
+                    BookTitle = oi.Book.Title,
+                    BookImageUrl = oi.Book.ImageUrl,
+                    Quantity = oi.Quantity,
+                    PriceAtPurchase = oi.PriceAtPurchase
+                })
+                .ToArray();
+
+            OrderDetailsViewModel viewModel = new OrderDetailsViewModel
+            {
+                Id = order.Id,
+                OrderDate = order.OrderDate,
+                TotalPrice = order.TotalPrice,
+                Status = order.Status.ToString(),
+                Items = items
+            };
+
+            return viewModel;
+        }
     }
 }

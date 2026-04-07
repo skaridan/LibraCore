@@ -20,5 +20,15 @@ namespace LibraCore.Infrastructure.Repositories
                 .AsNoTracking()
                 .ToArrayAsync();
         }
+
+        public async Task<Order?> GetOrderByIdAsync(Guid id)
+        {
+            return await DbContext
+                .Orders
+                .Include(o => o.OrderItems)
+                .ThenInclude(oi => oi.Book)
+                .AsNoTracking()
+                .SingleOrDefaultAsync(o => o.Id == id);
+        }
     }
 }
