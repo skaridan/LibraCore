@@ -60,10 +60,14 @@ namespace LibraCore.Web.Controllers
                 string userId = GetUserId()!;
 
                 await orderService.CreateOrderAsync(bookId, userId);
+
+                TempData["Success"] = CreateOrderSuccessMessage;
             }
             catch (EntityNotFoundException)
             {
                 logger.LogError(BookNotFoundMessage);
+
+                TempData["Error"] = BookNotFoundMessage;
 
                 return NotFound();
             }
@@ -72,8 +76,6 @@ namespace LibraCore.Web.Controllers
                 logger.LogError(CreateOrderFailureMessage);
 
                 TempData["Error"] = CreateOrderFailureMessage;
-
-                return RedirectToAction(nameof(Index));
             }
 
             return RedirectToAction(nameof(Index));

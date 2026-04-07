@@ -37,16 +37,21 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             try
             {
                 await orderService.UpdateOrderStatusAsync(id, newStatus);
+
+                TempData["Success"] = UpdateOrderStatusSuccessMessage;
             }
             catch (EntityNotFoundException)
             {
                 logger.LogError(BookNotFoundMessage);
 
-                return NotFound();
+                TempData["Error"] = BookNotFoundMessage;
+
+                return RedirectToAction("Details", "Order", new { area = "", id = id });
             }
             catch (EntityPersistFailureException)
             {
                 logger.LogError(CreateOrderFailureMessage);
+
                 TempData["Error"] = CreateOrderFailureMessage;
             }
 
