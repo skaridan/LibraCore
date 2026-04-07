@@ -49,7 +49,9 @@
             public const string AddReviewFailureMessage = "An error occurred while adding the review. Please try again.";
             public const string UnexpectedErrorMessage = "Unexpected error while adding a review.";
 
+            public const string UnexpectedDeleteErrorMessage = "Unexpected error while deleting a review.";
             public const string AddReviewSuccessMessage = "Review was added successfully.";
+            public const string DeleteReviewSuccessMessage = "Review was deleted successfully.";
         }
 
         public static class Order

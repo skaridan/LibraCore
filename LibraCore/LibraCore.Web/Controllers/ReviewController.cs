@@ -62,13 +62,15 @@ namespace LibraCore.Web.Controllers
 
                 await reviewService.AddReviewAsync(model, userId);
 
+                TempData["Success"] = AddReviewSuccessMessage;
+
                 return RedirectToAction(nameof(Index), new { bookId = model.BookId });
             }
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, AddReviewFailureMessage);
 
-                ModelState.AddModelError(string.Empty, AddReviewFailureMessage);
+                TempData["Error"] = AddReviewFailureMessage;
 
                 return View(model);
             }
@@ -76,7 +78,7 @@ namespace LibraCore.Web.Controllers
             {
                 logger.LogError(ex, UnexpectedErrorMessage);
 
-                ModelState.AddModelError(string.Empty, UnexpectedErrorMessage);
+                TempData["Error"] = UnexpectedErrorMessage;
 
                 return View(model);
             }

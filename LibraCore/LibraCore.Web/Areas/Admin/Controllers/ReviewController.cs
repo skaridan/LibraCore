@@ -3,6 +3,8 @@ using LibraCore.Services.Interfaces;
 using LibraCore.ViewModels.Review;
 using Microsoft.AspNetCore.Mvc;
 
+using static LibraCore.GCommon.OutputMessages.Review;
+
 namespace LibraCore.Web.Areas.Admin.Controllers
 {
     public class ReviewController : BaseAdminController
@@ -45,6 +47,8 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             {
                 await reviewService.SoftDeleteReviewAsync(id);
 
+                TempData["Success"] = DeleteReviewSuccessMessage;
+
                 return RedirectToAction("Index", "Review", new { area = "", bookId = model.BookId });
             }
             catch (EntityNotFoundException)
@@ -54,6 +58,9 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, "Failed to delete review.");
+
+                TempData["Error"] = UnexpectedDeleteErrorMessage;
+
                 return RedirectToAction("Index", "Review", new { area = "", bookId = model.BookId });
             }
         }

@@ -45,18 +45,24 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             {
                 await authorService.AddAuthorAsync(model);
 
+                TempData["Success"] = AddAuthorSuccessMessage;
+
                 return RedirectToAction(nameof(Index));
             }
             catch (EntityAlreadyExistsException eaee)
             {
                 logger.LogError(eaee, string.Format(AuthorAlreadyExistsMessage, model.Name));
-                ModelState.AddModelError(string.Empty, string.Format(AuthorAlreadyExistsMessage, model.Name));
+
+                TempData["Error"] = string.Format(AuthorAlreadyExistsMessage, model.Name);
+
                 return View(model);
             }
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, AddAuthorFailureMessage);
-                ModelState.AddModelError(string.Empty, AddAuthorFailureMessage);
+
+                TempData["Error"] = AddAuthorFailureMessage;
+
                 return View(model);
             }
         }
@@ -89,6 +95,9 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             try
             {
                 await authorService.SoftDeleteAuthorAsync(id);
+
+                TempData["Success"] = DeleteAuthorSuccessMessage;
+
                 return RedirectToAction(nameof(Index));
             }
             catch (EntityNotFoundException)
@@ -98,6 +107,9 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, DeleteAuthorFailureMessage);
+
+                TempData["Error"] = DeleteAuthorFailureMessage;
+
                 return RedirectToAction(nameof(Index));
             }
         }

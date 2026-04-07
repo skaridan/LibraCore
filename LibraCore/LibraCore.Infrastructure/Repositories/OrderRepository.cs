@@ -37,7 +37,7 @@ namespace LibraCore.Infrastructure.Repositories
 
             int resultCount = await SaveChangesAsync();
 
-            return resultCount == 1;
+            return resultCount > 0;
         }
 
         public async Task<IEnumerable<Order>> GetAllOrdersAsync()
