@@ -46,12 +46,15 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             {
                 await bookService.AddBookAsync(formModel);
 
+                TempData["Success"] = AddBookSuccessMessage;
+
                 return RedirectToAction("Index", "Book", new { area = "" });
             }
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, string.Format(CrudBookFailureMessage, nameof(Add)));
-                ModelState.AddModelError(string.Empty, string.Format(CrudBookFailureMessage, nameof(Add)));
+
+                TempData["Error"] = string.Format(CrudBookFailureMessage, nameof(Add));
 
                 formModel.Genres = (await genreService.FetchGenresAsync()).ToArray();
                 return View(formModel);
@@ -59,7 +62,8 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex, GeneralError);
-                ModelState.AddModelError(string.Empty, GeneralError);
+
+                TempData["Error"] = GeneralError;
 
                 formModel.Genres = (await genreService.FetchGenresAsync()).ToArray();
                 return View(formModel);
@@ -99,6 +103,8 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             {
                 await bookService.EditBookAsync(id, formModel);
 
+                TempData["Success"] = EditBookSuccessMessage;
+
                 return RedirectToAction("Details", "Book", new { area = "", id });
             }
             catch (EntityNotFoundException)
@@ -108,7 +114,8 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, string.Format(CrudBookFailureMessage, nameof(Edit)));
-                ModelState.AddModelError(string.Empty, PersistFailureMessage);
+
+                TempData["Error"] = PersistFailureMessage;
 
                 formModel.Genres = (await genreService.FetchGenresAsync()).ToArray();
                 return View(formModel);
@@ -116,7 +123,8 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             catch (Exception ex)
             {
                 logger.LogError(ex, GeneralError);
-                ModelState.AddModelError(string.Empty, GeneralError);
+
+                TempData["Error"] = GeneralError;
 
                 return View(formModel);
             }
@@ -152,6 +160,8 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             {
                 await bookService.SoftDeleteBookAsync(id);
 
+                TempData["Success"] = DeleteBookSuccessMessage;
+
                 return RedirectToAction("Index", "Book", new { area = "" });
             }
             catch (EntityNotFoundException)
@@ -161,13 +171,14 @@ namespace LibraCore.Web.Areas.Admin.Controllers
             catch (EntityPersistFailureException epfe)
             {
                 logger.LogError(epfe, string.Format(CrudBookFailureMessage, nameof(Delete)));
-                ModelState.AddModelError(string.Empty, PersistFailureMessage);
+                
+                TempData["Error"] = PersistFailureMessage;
             }
             catch (Exception ex)
             {
                 logger.LogError(ex, GeneralError);
 
-                return RedirectToAction("Details", "Book", new { area = "", id });
+                TempData["Error"] = GeneralError;
             }
 
             return RedirectToAction("Index", "Book", new { area = "" });
