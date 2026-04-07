@@ -30,5 +30,14 @@ namespace LibraCore.Infrastructure.Repositories
                 .AsNoTracking()
                 .SingleOrDefaultAsync(o => o.Id == id);
         }
+
+        public async Task<bool> AddOrderAsync(Order order)
+        {
+            await DbContext.Orders.AddAsync(order);
+
+            int resultCount = await SaveChangesAsync();
+
+            return resultCount == 1;
+        }
     }
 }

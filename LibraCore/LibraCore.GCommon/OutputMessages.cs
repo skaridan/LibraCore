@@ -40,5 +40,11 @@
             public const string AddReviewFailureMessage = "An error occurred while adding the review. Please try again.";
             public const string UnexpectedErrorMessage = "Unexpected error while adding a review.";
         }
+
+        public static class Order
+        {
+            public const string BookNotFoundMessage = "The book you are trying to order was not found.";
+            public const string CreateOrderFailureMessage = "An error occurred while placing your order. Please try again.";
+        }
     }
 }

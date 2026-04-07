@@ -1,4 +1,5 @@
-﻿using LibraCore.Infrastructure.Data.Entities;
+﻿using LibraCore.GCommon.Exceptions;
+using LibraCore.Infrastructure.Data.Entities;
 using LibraCore.Infrastructure.Repositories.Interfaces;
 using LibraCore.Services.Interfaces;
 using LibraCore.ViewModels.Order;
@@ -8,10 +9,12 @@ namespace LibraCore.Services
     public class OrderService : IOrderService
     {
         private readonly IOrderRepository orderRepository;
+        private readonly IBookRepository bookRepository;
 
-        public OrderService(IOrderRepository orderRepository)
+        public OrderService(IOrderRepository orderRepository, IBookRepository bookRepository)
         {
             this.orderRepository = orderRepository;
+            this.bookRepository = bookRepository;
         }
 
         public async Task<IEnumerable<OrderViewModel>> GetUserOrdersAsync(string userId)
@@ -63,6 +66,34 @@ namespace LibraCore.Services
             };
 
             return viewModel;
+        }
+
+        public async Task CreateOrderAsync(Guid bookId, string userId)
+        {
+            Book? book = await bookRepository.GetBookByIdAsync(bookId);
+            if (book == null)
+            {
+                throw new EntityNotFoundException();
+            }
+
+            OrderItem orderItem = new OrderItem
+            {
+                BookId = bookId,
+                Quantity = 1,
+                PriceAtPurchase = book.Price
+            };
+
+            Order order = new Order();
+
+            order.UserId = Guid.Parse(userId);
+            order.TotalPrice = book.Price;
+            order.OrderItems.Add(orderItem);
+
+            bool success = await orderRepository.AddOrderAsync(order);
+            if (!success)
+            {
+                throw new EntityPersistFailureException();
+            }
         }
     }
 }

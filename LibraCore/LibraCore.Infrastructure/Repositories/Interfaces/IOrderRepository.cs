@@ -7,5 +7,7 @@ namespace LibraCore.Infrastructure.Repositories.Interfaces
         Task<IEnumerable<Order>> GetUserOrdersAsync(Guid userId);
 
         Task<Order?> GetOrderByIdAsync(Guid id);
+
+        Task<bool> AddOrderAsync(Order order);
     }
 }

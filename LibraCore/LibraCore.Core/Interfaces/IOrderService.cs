@@ -7,5 +7,7 @@ namespace LibraCore.Services.Interfaces
         Task<IEnumerable<OrderViewModel>> GetUserOrdersAsync(string userId);
 
         Task<OrderDetailsViewModel?> GetOrderDetailsAsync(Guid id);
+
+        Task CreateOrderAsync(Guid bookId, string userId);
     }
 }
